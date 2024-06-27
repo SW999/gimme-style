@@ -1,0 +1,177 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font: 16px Helvetica, sans-serif;
+    line-height: 24px;
+    background: url(../images/noise.jpg);
+}
+
+.page-wrap {
+    width: 800px;
+    margin: 40px auto 60px auto;
+    padding: 0 20px;
+}
+
+.pic {
+    float: right;
+    border-radius: 4px;
+}
+
+.vcard {
+    margin-bottom: 45px;
+}
+
+h1 {
+    width: calc(100% - 200px);
+    color: #016b5d;
+    margin: 0 0 20px 0;
+    font-size: 42px;
+    letter-spacing: -2px;
+    border-bottom: 1px solid #999;
+}
+
+h1 span {
+    font-size: 20px;
+    color: #343434;
+    font-weight: normal;
+    letter-spacing: 1px;
+    line-height: 3;
+}
+
+h2 {
+    font-size: 20px;
+    margin: 0 0 15px 0;
+    color: #016b5d;
+}
+
+h2 span, .objective p, h3 span {
+    font-family: Georgia, serif;
+}
+
+h2 span {
+    display: block;
+    font-style: italic;
+    font-size: 16px;
+    color: #999;
+    font-weight: normal;
+}
+
+h3 {
+    font-size: 16px;
+    margin: 0 0 10px 0;
+    color: #343434;
+}
+
+h3 span {
+    font-style: italic;
+    margin-left: 10px;
+    font-size: 14px;
+    color: #999;
+    font-weight: normal;
+}
+
+p {
+    margin: 0 0 16px 0;
+}
+
+summary {
+    cursor: pointer;
+}
+
+a {
+    color: #999;
+    text-decoration: none;
+    border-bottom: 1px dotted #999;
+}
+
+a:before {
+    color: #999;
+    text-decoration: none;
+    border-bottom: 1px dotted #999;
+}
+
+a:hover {
+    display: inline-block;
+    border-bottom-style: solid;
+    color: black;
+    animation: pulse 0.6s 2;
+}
+
+a:visited {
+    display: inline-block;
+    border: 0;
+    color: gray;
+    animation: pulse2 0.4s 3;
+}
+
+ul {
+    margin: 0 0 32px 17px;
+}
+
+.objective {
+    width: 700px;
+    margin-bottom: 40px;
+}
+
+.objective p {
+    font-style: italic;
+    color: #343434;
+}
+
+dl {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+dt {
+    font-style: italic;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: right;
+    padding: 0 25px 0 0;
+    width: 120px;
+    height: 140px;
+    border-right: 1px solid #999;
+    color: #343434;
+}
+
+dd {
+    width: 605px;
+    margin-bottom: 30px;
+    padding-left: 25px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    margin: 40px 0;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+@keyframes pulse {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    50% {
+        transform: scale3d(1.09, 1.09, 1.09);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes pulse2 {
+    from {
+        transform: scale3d(1, 1, 1);
+    }
+
+    to {
+        transform: scale3d(1, 1, 1);
+    }
+}
