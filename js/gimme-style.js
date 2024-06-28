@@ -80,6 +80,90 @@ if (typeof GimmeStyle === 'undefined') {
 
         toggleFreeze: () => {},
 
+        handleMouseOver: (e) => {
+            const self = GimmeStyle;
+            const { pause, freeze} = self.settings;
+            let { infoId, dashboardId, highlightClass, uniqStyles, uniqKeyFrames, initialized, hideClass } = self.constants;
+
+            if (pause) {
+                self.cleanHighlightClass();
+            } else {
+                e.preventDefault();
+
+                const target = e.target;
+
+                if (freeze || self.isIdMuch(target, [infoId, dashboardId])) {
+                    return;
+                }
+
+                self.constants.prevTarget?.classList.remove(highlightClass);
+
+                uniqStyles.clear();
+                uniqKeyFrames.clear();
+                self.constants.result = '';
+
+                if (!initialized) {
+                    self.constants.info.classList.remove(hideClass);
+                    self.constants.initialized = true;
+                }
+
+                self.constants.prevTarget = target;
+
+                self.getAppliedCssData({ el: target });
+                self.moveInfoPopup(target);
+            }
+        },
+
+        moveInfoPopup: function (el) {
+            if (this.settings.pause) {
+                return;
+            }
+
+            const delta = 7;
+            const { width: infoWidth, height: infoHeight } = this.constants.info.getBoundingClientRect();
+            const { width: elWidth, x, y } = el.getBoundingClientRect();
+            const { scrollX, scrollY, innerWidth, innerHeight } = window;
+            let infoX = x + scrollX + elWidth - delta;
+            let infoY = y + scrollY + delta;
+
+            if (infoX + infoWidth > innerWidth + scrollX) {
+                infoX = x + scrollX - infoWidth + delta >= 0 ? x + scrollX - infoWidth + delta : x + scrollX;
+            }
+
+            if (infoY < scrollY) {
+                infoY = scrollY + delta;
+            } else if (infoY + infoHeight > scrollY + innerHeight) {
+                infoY = infoY - infoHeight >= scrollY ? infoY - infoHeight : scrollY + delta;
+            }
+
+            this.constants.info.style.transform = `translate(${infoX}px, ${infoY}px)`;
+        },
+
+        getAppliedCssData: function ({el, isChild, forCopy = false}) {
+            const { dashboardId, highlightClass } = this.constants;
+
+            if (!el || this.isIdMuch(el, dashboardId)) { // Ignore hover on GS dashboard
+                return null;
+            }
+
+            if (!isChild) {
+                el.classList.add(highlightClass);
+            }
+        },
+
+        // Utils
+        isIdMuch: (target, id) => {
+            const ids = Array.isArray(id) ? id : [id];
+
+            return ids.some((elId) => target.id === elId || target.closest(`#${elId}`));
+        },
+
+        cleanHighlightClass: function () {
+            const { highlightClass } = this.constants;
+
+            document.querySelector(`.${highlightClass}`)?.classList.remove(highlightClass);
+        },
+
         init: function () {
             console.log("GimmeStyle initialized");
 
@@ -88,6 +172,7 @@ if (typeof GimmeStyle === 'undefined') {
             document.querySelector('.pause-GS').addEventListener('click', this.togglePause);
             document.querySelector('.unlock-GS').addEventListener('click', this.toggleLock);
             document.querySelector('.about-GS').addEventListener('click', this.toggleAbout);
+            document.addEventListener('mouseover', this.handleMouseOver);
 
         },
         destroy: function () {
@@ -97,6 +182,7 @@ if (typeof GimmeStyle === 'undefined') {
             document.querySelector('.pause-GS').removeEventListener('click', this.togglePause);
             document.querySelector('.unlock-GS').removeEventListener('click', this.toggleLock);
             document.querySelector('.about-GS').removeEventListener('click', this.toggleAbout);
+            document.removeEventListener('mouseover', this.handleMouseOver);
         }
     };
 
