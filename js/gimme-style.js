@@ -1,7 +1,7 @@
 if (typeof GimmeStyle === 'undefined') {
     const GimmeStyle = {
         constants: {
-            cssGS: `.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box}html{height:100%}body{width:100%;min-height:100%;position:absolute}.dashboard-wrapper-GS{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{position:sticky;top:1px;float:right;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;width:348px;margin:0;padding:4px;border:2px dashed green;border-radius:4px;background-color:#fff;color:#383428}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid currentColor;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer}.copy-option-GS input,.copy-option-GS label{pointer-events:none}.destroy-GS,.pause-GS,.unlock-GS,.about-GS{position:relative;display:block;cursor:pointer}.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before,.about-GS::after,.about-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{width:12px;height:10px;border:2px solid;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:currentColor}.unlock-GS::after{left:-4px;top:8px;width:16px;height:10px;border-radius:2px;border:2px solid transparent;box-shadow:0 0 0 2px}.unlock-GS::before{left:3px;top:10px;width:2px;height:5px;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid;border-radius:40px}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:7px;background:currentColor}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid orange;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}.info-GS{position:absolute;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#383428;color:#00ff2b;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap}.info-GS.locked{border:thin solid orange;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:orange;transform:translateX(-50%)}.info-GS.copied::before{display:block;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.hide-GS{display:none!important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}`,
+            cssGS: '.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box}html{height:100%}body{width:100%;min-height:100%;position:absolute}.dashboard-wrapper-GS{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{position:sticky;top:1px;float:right;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;width:348px;margin:0;padding:4px;border:2px dashed green;border-radius:4px;background-color:#fff;color:#383428}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid currentColor;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer}.copy-option-GS input,.copy-option-GS label{pointer-events:none}.destroy-GS,.pause-GS,.unlock-GS,.about-GS{position:relative;display:block;cursor:pointer}.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before,.about-GS::after,.about-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{width:12px;height:10px;border:2px solid;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:currentColor}.unlock-GS::after{left:-4px;top:8px;width:16px;height:10px;border-radius:2px;border:2px solid transparent;box-shadow:0 0 0 2px}.unlock-GS::before{left:3px;top:10px;width:2px;height:5px;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid;border-radius:40px}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:7px;background:currentColor}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid orange;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}.info-GS{position:absolute;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#383428;color:#00ff2b;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap}.info-GS.locked{border:thin solid orange;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:orange;transform:translateX(-50%)}.info-GS.copied::before{display:block;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.hide-GS{display:none!important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
             dashboardId: 'dashboardWrapperGS',
             hideClass: 'hide-GS',
             highlightClass: 'selected-GS',
@@ -23,7 +23,7 @@ if (typeof GimmeStyle === 'undefined') {
             pause: false,
         },
 
-        addUI: function () {
+        addUI() {
             let { dashboardId, infoId, stylesId, cssGS } = this.constants;
             const dashboard = document.createElement('div');
             dashboard.id = dashboardId;
@@ -82,7 +82,7 @@ if (typeof GimmeStyle === 'undefined') {
 
         handleMouseOver: (e) => {
             const self = GimmeStyle;
-            const { pause, freeze} = self.settings;
+            const { pause, freeze } = self.settings;
             let { infoId, dashboardId, highlightClass, uniqStyles, uniqKeyFrames, initialized, hideClass } = self.constants;
 
             if (pause) {
@@ -109,12 +109,14 @@ if (typeof GimmeStyle === 'undefined') {
 
                 self.constants.prevTarget = target;
 
+                target.classList.add(highlightClass);
+
                 self.getAppliedCssData({ el: target });
-                self.moveInfoPopup(target);
+                self.movePopup(target);
             }
         },
 
-        moveInfoPopup: function (el) {
+        movePopup(el) {
             if (this.settings.pause) {
                 return;
             }
@@ -139,16 +141,169 @@ if (typeof GimmeStyle === 'undefined') {
             this.constants.info.style.transform = `translate(${infoX}px, ${infoY}px)`;
         },
 
-        getAppliedCssData: function ({el, isChild, forCopy = false}) {
-            const { dashboardId, highlightClass } = this.constants;
+        // eslint-disable-next-line consistent-return
+        getAppliedCssData({ el, isChild, forCopy = false }) {
+            const { dashboardId, highlightClass, stylesId } = this.constants;
 
             if (!el || this.isIdMuch(el, dashboardId)) { // Ignore hover on GS dashboard
                 return null;
             }
 
-            if (!isChild) {
-                el.classList.add(highlightClass);
+            const allRules = [...document.styleSheets].reduce((res, s) => {
+                try {
+                    if (s.ownerNode.id !== stylesId) {
+                        res.push(...s.cssRules);
+                    }
+                } catch (e) { // ignore cross-domain stylesheets with restrictive CORS headers
+                    console.error(e);
+                }
+
+                return res;
+            }, []).flat();
+
+            const defaultRules = [];
+            const hoverRules = [];
+            const activeRules = [];
+            const visitedRules = [];
+            const focusRules = [];
+            const focusWithinRules = [];
+            const beforeRules = [];
+            const afterRules = [];
+            const keyframesRules = [];
+            const allStyleRules = [];
+
+            allRules.forEach((rule) => {
+                if (rule.type === window.CSSRule.STYLE_RULE) {
+                    if (el.matches(rule.selectorText)) {
+                        if (rule.selectorText !== `.${highlightClass}`) {
+                            defaultRules.push(rule);
+                            allStyleRules.push(rule);
+                        }
+                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/([^(])(:hover)\b/g, '$1'))) {
+                        hoverRules.push(rule);
+                        allStyleRules.push(rule);
+                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/([^(])(:active)\b/g, '$1'))) {
+                        activeRules.push(rule);
+                        allStyleRules.push(rule);
+                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/([^(])(:visited)\b/g, '$1'))) {
+                        visitedRules.push(rule);
+                        allStyleRules.push(rule);
+                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/([^(])(:focus)\b/g, '$1'))) {
+                        focusRules.push(rule);
+                        allStyleRules.push(rule);
+                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/([^(])(:focus-within)\b/g, '$1'))) {
+                        focusWithinRules.push(rule);
+                        allStyleRules.push(rule);
+                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/::before\b/g, ''))) {
+                        beforeRules.push(rule);
+                        allStyleRules.push(rule);
+                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/::after\b/g, ''))) {
+                        afterRules.push(rule);
+                        allStyleRules.push(rule);
+                    }
+                } else if (rule.type === window.CSSRule.KEYFRAMES_RULE) {
+                    keyframesRules.push(rule);
+                }
+            });
+
+            const animationNames = allStyleRules.reduce((res, rule) => {
+                if (rule.style.animationName) {
+                    res.push(rule.style.animationName);
+                }
+                return res;
+            }, []);
+            const keyframeStyles = keyframesRules.reduce((res, rule) => {
+                if (animationNames.includes(rule.name)) {
+                    const css = rule.cssText;
+                    if (this.constants.uniqKeyFrames.has(css)) {
+                        return res;
+                    }
+
+                    this.constants.uniqKeyFrames.add(css);
+
+                    return `${res}${rule.cssText}\n\n`;
+                }
+
+                return res;
+            }, '');
+
+            let defaultStyles = this.getStylesByRules(defaultRules);
+            let inlineStyles = (el.getAttribute('style') ?? '').trim();
+
+            // Add inline styles
+            if (inlineStyles !== '') {
+                inlineStyles = inlineStyles
+                    .replace(/:\s*/g, ': ')
+                    .replace(/;?$/, ';')
+                    .replace(/;\s*(?!$)/g, ';\n    ');
+
+                defaultStyles = defaultStyles.replace(/}\n\n$/, `    ${inlineStyles}\n}\n\n`);
             }
+
+            this.constants.result = this.constants.result + [beforeRules, afterRules, hoverRules, activeRules, visitedRules, focusRules, focusWithinRules]
+                .reduce((res, styles) => {
+                    return Boolean(styles) ? `${res}${this.getStylesByRules(styles)}` : res;
+                }, defaultStyles);
+
+            if (this.constants.result !== '') {
+                if (isChild || forCopy) {
+                    this.constants.result = `${this.constants.result}${keyframeStyles}`;
+                } else {
+                    this.constants.result = `${this.getSelectorName(el)}    ${el.offsetWidth}×${el.offsetHeight}px
+----------------
+${this.constants.result}${keyframeStyles}`;
+                }
+            }
+
+            if (this.settings.needChildCss && forCopy) {
+                this.getChildrenStyles(el);
+            }
+
+            if (!(forCopy || isChild)) {
+                this.constants.info.innerText = this.constants.result.trim();
+            }
+        },
+
+        getStylesByRules(rules) {
+            return rules.reduce((res, rule) => {
+                const css = rule.cssText;
+
+                if (this.settings.needChildCss) {
+                    if(this.constants.uniqStyles.has(css)) {
+                        return res;
+                    }
+
+                    this.constants.uniqStyles.add(css);
+                }
+
+                let separator = '\n    ';
+
+                if (res === '' || res.endsWith('}\n\n')) {
+                    separator = '';
+                }
+
+                return `${res}${separator}${css
+                    .replace(/^(.*?) {/g, (m) => m.replace(/,\s+/g, ',\n'))
+                    .replace(/(\s+0px)/g, ' 0')
+                    .replace(/({ )/g, '{\n  ')
+                    .replace(/(; })/g, ';\n}\n\n')
+                    .replace(/(; )/g, ';\n  ')}`;
+            }, '');
+        },
+
+        getChildrenStyles(el) {
+            const childSelectors = [];
+
+            Array.from(el.children).forEach((child) => {
+                const selector = this.getSelectorName(child);
+
+                if (selector !== '' && !childSelectors.includes(selector)) {
+                    childSelectors.push(selector);
+
+                    this.getAppliedCssData({ el: child, isChild: true });
+                    this.getChildrenStyles(child);
+                }
+            });
         },
 
         // Utils
@@ -158,14 +313,33 @@ if (typeof GimmeStyle === 'undefined') {
             return ids.some((elId) => target.id === elId || target.closest(`#${elId}`));
         },
 
-        cleanHighlightClass: function () {
+        cleanHighlightClass() {
             const { highlightClass } = this.constants;
 
             document.querySelector(`.${highlightClass}`)?.classList.remove(highlightClass);
         },
 
-        init: function () {
-            console.log("GimmeStyle initialized");
+        getSelectorName(el) {
+            const { highlightClass } = this.constants;
+            const tag = el.tagName.toLowerCase();
+            let selector = tag;
+
+            if (['script', 'style'].includes(tag)) {
+                return '';
+            }
+
+            if (el.className && el.className !== highlightClass) {
+                const re = new RegExp(`(\\s+${highlightClass})`, 'g');
+                selector = `${selector}.${el.className.replace(re, '').replace(/\s+/g, '.')}`;
+            } else if (el.id) {
+                selector = `${selector}#${el.id}`;
+            }
+
+            return selector;
+        },
+
+        init() {
+            console.log('GimmeStyle initialized');
 
             this.addUI();
             document.querySelector('.destroy-GS').addEventListener('click', this.destroy);
@@ -173,10 +347,10 @@ if (typeof GimmeStyle === 'undefined') {
             document.querySelector('.unlock-GS').addEventListener('click', this.toggleLock);
             document.querySelector('.about-GS').addEventListener('click', this.toggleAbout);
             document.addEventListener('mouseover', this.handleMouseOver);
-
         },
-        destroy: function () {
-            console.log("GimmeStyle destroyed");
+
+        destroy() {
+            console.log('GimmeStyle destroyed');
 
             document.querySelector('.destroy-GS').removeEventListener('click', this.destroy);
             document.querySelector('.pause-GS').removeEventListener('click', this.togglePause);
