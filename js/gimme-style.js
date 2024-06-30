@@ -415,8 +415,6 @@ ${tempDiv.innerHTML.trim()}
         },
 
         init() {
-            console.log('GimmeStyle initialized');
-
             this.addUI();
             document.querySelector('.destroy-GS').addEventListener('click', this.destroy);
             document.querySelector('.pause-GS').addEventListener('click', this.togglePause);
@@ -430,8 +428,6 @@ ${tempDiv.innerHTML.trim()}
         },
 
         destroy() {
-            console.log('GimmeStyle destroyed');
-
             this.cleanHighlightClass();
             document.querySelector('.destroy-GS').removeEventListener('click', this.destroy);
             document.querySelector('.pause-GS').removeEventListener('click', this.togglePause);
@@ -443,7 +439,8 @@ ${tempDiv.innerHTML.trim()}
             document.removeEventListener('mouseover', this.handleMouseOver);
             document.removeEventListener('click', this.copyStylesOfSelectedEl);
 
-            delete window.GimmeStyle;
+            // TODO: remove dashboard on esc and destroy btn
+            //delete window.GimmeStyle;
         }
     };
 
