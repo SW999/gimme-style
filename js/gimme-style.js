@@ -1,8 +1,9 @@
-if (typeof GimmeStyle === 'undefined') {
-    const GimmeStyle = {
+if (typeof window.GimmeStyle === 'undefined') {
+    window.GimmeStyle = {
         constants: {
-            cssGS: '.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box}html{height:100%}body{width:100%;min-height:100%;position:absolute}.dashboard-wrapper-GS{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{box-shadow:rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;position:sticky;top:3px;float:right;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;width:350px;margin:0 5px 0 0;padding:4px;border:thin solid silver;border-radius:4px;background-color:#fff;color:#383428}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid orange;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer}.copy-option-GS input,.copy-option-GS label{pointer-events:none}.destroy-GS,.pause-GS,.unlock-GS,.about-GS{position:relative;display:block;cursor:pointer}.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before,.about-GS::after,.about-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid orange;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{top:-5px;width:13px;height:9px;margin:0 3px;border:2px solid orange;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:orange}.unlock-GS::after{left:-5px;top:6px;width:20px;height:13px;border-radius:3px;border:2px solid orange}.unlock-GS::before{left:3px;top:10px;width:4px;height:6px;border-radius:2px;border:thin solid white;border-top:4px solid black;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid orange;border-radius:40px}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:50%;background:currentColor;transform:translateX(-50%)}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid orange;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}.info-GS{position:absolute;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#383428;color:#00ff2b;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap}.info-GS.locked{border:thin solid orange;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:orange;transform:translateX(-50%)}.info-GS.copied::before{display:block;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.hide-GS{display:none!important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
+            cssGS: '.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box}html{height:100%}body{width:100%;min-height:100%;position:absolute}.dashboard-wrapper-GS{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{box-shadow:rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;position:sticky;top:3px;float:right;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;width:354px;margin:0 5px 0 0;padding:4px;border:thin solid silver;border-radius:4px;background-color:#fff;color:#383428}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid orange;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer}.copy-option-GS input,.copy-option-GS label{pointer-events:none}.destroy-GS,.pause-GS,.unlock-GS,.about-GS{position:relative;display:block;cursor:pointer}.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before,.about-GS::after,.about-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid orange;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{top:-6px;width:13px;height:9px;margin:0 3px;border:2px solid orange;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:orange}.unlock-GS::after{left:-5px;top:6px;width:20px;height:13px;border-radius:3px;border:2px solid orange}.unlock-GS::before{left:3px;top:10px;width:4px;height:6px;border-radius:2px;border:thin solid white;border-top:4px solid black;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid orange;border-radius:50%}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:50%;background:currentColor;transform:translateX(-50%)}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid orange;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}.info-GS{position:absolute;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#383428;color:#00ff2b;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap}.info-GS.locked{border:thin solid orange;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:orange;transform:translateX(-50%)}.info-GS.copied::before{display:block;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.hide-GS{display:none!important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
             dashboardId: 'dashboardWrapperGS',
+            delay: 2000,
             hideClass: 'hide-GS',
             highlightClass: 'selected-GS',
             info: null,
@@ -49,7 +50,7 @@ if (typeof GimmeStyle === 'undefined') {
         },
 
         togglePause: () => {
-            const self = GimmeStyle;
+            const self = window.GimmeStyle;
             const { pause } = self.settings;
             const { info, hideClass } = self.constants;
             const btn = document.querySelector('.pause-GS');
@@ -60,8 +61,8 @@ if (typeof GimmeStyle === 'undefined') {
             btn.title = pause ? 'Pause' : 'Play';
         },
 
-        toggleLock: () => {
-            const self = GimmeStyle;
+        toggleLock() {
+            const self = window.GimmeStyle;
             const { lock, freeze } = self.settings;
             const btn = document.querySelector('.unlock-GS');
 
@@ -69,21 +70,24 @@ if (typeof GimmeStyle === 'undefined') {
             btn.classList.toggle('lock-GS');
             btn.title = lock ? 'Freeze tooltip when clicking on the element' : 'Don\'t freeze tooltip on click';
 
-            if (freeze && !lock) {
+            if (freeze && !self.settings.lock) {
                 self.toggleFreeze();
             }
         },
 
-        toggleAbout: () => {
-            document.querySelector('.about-info-GS').classList.toggle(GimmeStyle.constants.hideClass);
+        toggleAbout() {
+            document.querySelector('.about-info-GS').classList.toggle(window.GimmeStyle.constants.hideClass);
         },
 
-        toggleFreeze: () => {},
+        toggleFreeze() {
+            this.settings.freeze = !this.settings.freeze;
+            document.getElementById(this.constants.infoId).classList.toggle('locked');
+        },
 
-        handleMouseOver: (e) => {
-            const self = GimmeStyle;
+        handleMouseOver(e) {
+            const self = window.GimmeStyle;
             const { pause, freeze } = self.settings;
-            let { infoId, dashboardId, highlightClass, uniqStyles, uniqKeyFrames, initialized, hideClass } = self.constants;
+            let { highlightClass, initialized, hideClass } = self.constants;
 
             if (pause) {
                 self.cleanHighlightClass();
@@ -92,14 +96,14 @@ if (typeof GimmeStyle === 'undefined') {
 
                 const target = e.target;
 
-                if (freeze || self.isIdMuch(target, [infoId, dashboardId])) {
+                if (freeze || self.isDashboard(target)) {
                     return;
                 }
 
                 self.constants.prevTarget?.classList.remove(highlightClass);
 
-                uniqStyles.clear();
-                uniqKeyFrames.clear();
+                self.constants.uniqStyles.clear();
+                self.constants.uniqKeyFrames.clear();
                 self.constants.result = '';
 
                 if (!initialized) {
@@ -111,8 +115,16 @@ if (typeof GimmeStyle === 'undefined') {
 
                 target.classList.add(highlightClass);
 
-                self.getAppliedCssData({ el: target });
+                let result = self.getElStyles(target);
+
+                self.constants.result = result;
                 self.movePopup(target);
+
+                result = `${self.getSelectorName(target)}    ${target.offsetWidth}×${target.offsetHeight}px
+----------------
+${result}`;
+
+                self.constants.info.innerText = result.trim(); // Show styles in popup
             }
         },
 
@@ -141,14 +153,8 @@ if (typeof GimmeStyle === 'undefined') {
             this.constants.info.style.transform = `translate(${infoX}px, ${infoY}px)`;
         },
 
-        // eslint-disable-next-line consistent-return
-        getAppliedCssData({ el, isChild, forCopy = false }) {
-            const { dashboardId, highlightClass, stylesId } = this.constants;
-
-            if (!el || this.isIdMuch(el, dashboardId)) { // Ignore hover on GS dashboard
-                return null;
-            }
-
+        getElStyles(el) {
+            const { highlightClass, stylesId } = this.constants;
             const allRules = [...document.styleSheets].reduce((res, s) => {
                 try {
                     if (s.ownerNode.id !== stylesId) {
@@ -229,6 +235,7 @@ If it happens with local files, please restart your browser with flag "--allow-f
             }, '');
 
             let defaultStyles = this.getStylesByRules(defaultRules);
+
             let inlineStyles = (el.getAttribute('style') ?? '').trim();
 
             // Add inline styles
@@ -241,28 +248,12 @@ If it happens with local files, please restart your browser with flag "--allow-f
                 defaultStyles = defaultStyles.replace(/}\n\n$/, `    ${inlineStyles}\n}\n\n`);
             }
 
-            this.constants.result = this.constants.result + [beforeRules, afterRules, hoverRules, activeRules, visitedRules, focusRules, focusWithinRules]
+            let result = [beforeRules, afterRules, hoverRules, activeRules, visitedRules, focusRules, focusWithinRules]
                 .reduce((res, styles) => {
                     return Boolean(styles) ? `${res}${this.getStylesByRules(styles)}` : res;
                 }, defaultStyles);
 
-            if (this.constants.result !== '') {
-                if (isChild || forCopy) {
-                    this.constants.result = `${this.constants.result}${keyframeStyles}`;
-                } else {
-                    this.constants.result = `${this.getSelectorName(el)}    ${el.offsetWidth}×${el.offsetHeight}px
-----------------
-${this.constants.result}${keyframeStyles}`;
-                }
-            }
-
-            if (this.settings.needChildCss && forCopy) {
-                this.getChildrenStyles(el);
-            }
-
-            if (!(forCopy || isChild)) {
-                this.constants.info.innerText = this.constants.result.trim();
-            }
+            return result === '' ? '' : `${result}${keyframeStyles}`;
         },
 
         getStylesByRules(rules) {
@@ -292,26 +283,84 @@ ${this.constants.result}${keyframeStyles}`;
             }, '');
         },
 
-        getChildrenStyles(el) {
+        addChildrenStyles(el) {
             const childSelectors = [];
+            const children = el.querySelectorAll('*');
 
-            Array.from(el.children).forEach((child) => {
+            Array.from(children).forEach((child) => {
+                if (this.isDashboard(child)) { // Ignore GS dashboard styles
+                    return;
+                }
+
                 const selector = this.getSelectorName(child);
 
-                if (selector !== '' && !childSelectors.includes(selector)) {
-                    childSelectors.push(selector);
-
-                    this.getAppliedCssData({ el: child, isChild: true });
-                    this.getChildrenStyles(child);
+                if (selector === '' || childSelectors.includes(selector)) {
+                    return;
                 }
+
+                childSelectors.push(selector);
+                this.constants.result = this.constants.result + this.getElStyles(child);
+            });
+        },
+
+        toggleCopyOption(e) {
+            const self = window.GimmeStyle;
+            const target = e.currentTarget;
+            const input = target.children[0];
+            const val = input.value;
+
+            self.settings[val] = !self.settings[val];
+            input.checked = !input.checked;
+        },
+
+        copyStylesOfSelectedEl(e) {
+            e.preventDefault();
+
+            const target = e.target;
+            const self = window.GimmeStyle;
+            const { freeze, lock, needHtml, needChildCss } = self.settings;
+            const { infoId, delay } = self.constants;
+
+            if (freeze || self.isDashboard(target)) {
+                return;
+            }
+
+            if (lock && !freeze) {
+                self.toggleFreeze();
+            }
+
+            if (needChildCss) {
+                self.addChildrenStyles(target);
+            }
+
+            let textToCopy = self.constants.result.trim();
+
+            if (needHtml) {
+                const html = self.getHtmlString(target);
+
+                textToCopy = `${textToCopy}
+
+----------------
+${html}`;
+            }
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const popup = document.getElementById(infoId);
+                const copied = 'copied';
+
+                popup.classList.add(copied);
+
+                setTimeout(() => {
+                    popup.classList.remove(copied);
+                }, delay);
             });
         },
 
         // Utils
-        isIdMuch: (target, id) => {
-            const ids = Array.isArray(id) ? id : [id];
+        isDashboard(target) {
+            const id = this.constants.dashboardId;
 
-            return ids.some((elId) => target.id === elId || target.closest(`#${elId}`));
+            return target.id === id || target.closest(`#${id}`);
         },
 
         cleanHighlightClass() {
@@ -339,6 +388,32 @@ ${this.constants.result}${keyframeStyles}`;
             return selector;
         },
 
+        getHtmlString(target) {
+            const { dashboardId, stylesId } = this.constants;
+            let html = target.outerHTML.replace('selected-GS', '');
+
+            if (html.startsWith('<body')) {
+                let tempDiv = document.createElement('div');
+                const bodyTag = html.substring(0, html.indexOf('>') + 1).replace(' class=""', '');
+
+                tempDiv.innerHTML = html;
+
+                [dashboardId, stylesId].forEach((id) => {
+                    let elementToRemove = tempDiv.querySelector(`#${id}`);
+
+                    if (elementToRemove) {
+                        elementToRemove.remove();
+                    }
+                });
+
+                html = `${bodyTag}
+${tempDiv.innerHTML.trim()}
+</body>`;
+            }
+
+            return html;
+        },
+
         init() {
             console.log('GimmeStyle initialized');
 
@@ -347,21 +422,32 @@ ${this.constants.result}${keyframeStyles}`;
             document.querySelector('.pause-GS').addEventListener('click', this.togglePause);
             document.querySelector('.unlock-GS').addEventListener('click', this.toggleLock);
             document.querySelector('.about-GS').addEventListener('click', this.toggleAbout);
+            document.querySelectorAll('.copy-option-GS').forEach((el) => {
+                el.addEventListener('click', this.toggleCopyOption);
+            });
             document.addEventListener('mouseover', this.handleMouseOver);
+            document.addEventListener('click', this.copyStylesOfSelectedEl);
         },
 
         destroy() {
             console.log('GimmeStyle destroyed');
 
+            this.cleanHighlightClass();
             document.querySelector('.destroy-GS').removeEventListener('click', this.destroy);
             document.querySelector('.pause-GS').removeEventListener('click', this.togglePause);
             document.querySelector('.unlock-GS').removeEventListener('click', this.toggleLock);
             document.querySelector('.about-GS').removeEventListener('click', this.toggleAbout);
+            document.querySelectorAll('.copy-option-GS').forEach((el) => {
+                el.removeEventListener('click', this.toggleCopyOption);
+            });
             document.removeEventListener('mouseover', this.handleMouseOver);
+            document.removeEventListener('click', this.copyStylesOfSelectedEl);
+
+            delete window.GimmeStyle;
         }
     };
 
-    GimmeStyle.init();
+    window.GimmeStyle.init();
 } else {
-    GimmeStyle.destroy();
+    window.GimmeStyle.destroy();
 }
