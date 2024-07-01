@@ -446,21 +446,21 @@ ${tempDiv.innerHTML.trim()}
         },
 
         destroy() {
-            const { dashboardId, stylesId } = this.constants;
-            // FIXME: Cannot destructure property 'dashboardId' of 'this.constants' as it is undefined.
-            document.querySelector('.destroy-GS').removeEventListener('click', this.destroy);
-            document.querySelector('.pause-GS').removeEventListener('click', this.togglePause);
-            document.querySelector('.unlock-GS').removeEventListener('click', this.toggleLock);
-            document.querySelector('.about-GS').removeEventListener('click', this.toggleAbout);
-            document.querySelectorAll('.copy-option-GS').forEach((el) => {
-                el.removeEventListener('click', this.toggleCopyOption);
-            });
-            document.removeEventListener('scroll', this.placeDashboard);
-            document.removeEventListener('mouseover', this.handleMouseOver);
-            document.removeEventListener('click', this.copyStylesOfSelectedEl);
-            document.removeEventListener('keydown', this.handleEscapePress);
+            const { dashboardId, stylesId } = self.constants;
 
-            this.cleanHighlightClass();
+            document.querySelector('.destroy-GS').removeEventListener('click', self.destroy);
+            document.querySelector('.pause-GS').removeEventListener('click', self.togglePause);
+            document.querySelector('.unlock-GS').removeEventListener('click', self.toggleLock);
+            document.querySelector('.about-GS').removeEventListener('click', self.toggleAbout);
+            document.querySelectorAll('.copy-option-GS').forEach((el) => {
+                el.removeEventListener('click', self.toggleCopyOption);
+            });
+            document.removeEventListener('scroll', self.placeDashboard);
+            document.removeEventListener('mouseover', self.handleMouseOver);
+            document.removeEventListener('click', self.copyStylesOfSelectedEl);
+            document.removeEventListener('keydown', self.handleEscapePress);
+
+            self.cleanHighlightClass();
             document.getElementById(dashboardId).remove();
             document.getElementById(stylesId).remove();
             self = null;
