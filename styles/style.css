@@ -27,24 +27,24 @@ body {
 
 h1 {
     width: calc(100% - 200px);
-    color: #016b5d;
     margin: 0 0 20px 0;
+    border-bottom: 1px solid #999;
+    color: #016b5d;
     font-size: 42px;
     letter-spacing: -2px;
-    border-bottom: 1px solid #999;
 }
 
 h1 span {
-    font-size: 20px;
     color: #343434;
+    font-size: 20px;
     font-weight: normal;
     letter-spacing: 1px;
     line-height: 3;
 }
 
 h2 {
-    font-size: 20px;
     margin: 0 0 15px 0;
+    font-size: 20px;
     color: #016b5d;
 }
 
@@ -54,23 +54,23 @@ h2 span, .objective p, h3 span {
 
 h2 span {
     display: block;
+    color: #999;
     font-style: italic;
     font-size: 16px;
-    color: #999;
     font-weight: normal;
 }
 
 h3 {
-    font-size: 16px;
     margin: 0 0 10px 0;
     color: #343434;
+    font-size: 16px;
 }
 
 h3 span {
-    font-style: italic;
     margin-left: 10px;
-    font-size: 14px;
     color: #999;
+    font-style: italic;
+    font-size: 14px;
     font-weight: normal;
 }
 
@@ -83,15 +83,15 @@ summary {
 }
 
 a {
+    border-bottom: 1px dotted #999;
     color: #999;
     text-decoration: none;
-    border-bottom: 1px dotted #999;
 }
 
-a:before {
+a:before { /* only for demo */
+    border-bottom: 1px dotted #999;
     color: #999;
     text-decoration: none;
-    border-bottom: 1px dotted #999;
 }
 
 a:hover {
@@ -99,13 +99,6 @@ a:hover {
     border-bottom-style: solid;
     color: black;
     animation: pulse 0.6s 2;
-}
-
-a:visited {
-    display: inline-block;
-    border: 0;
-    color: gray;
-    animation: pulse2 0.4s 3;
 }
 
 ul {
@@ -118,8 +111,8 @@ ul {
 }
 
 .objective p {
-    font-style: italic;
     color: #343434;
+    font-style: italic;
 }
 
 dl {
@@ -128,15 +121,15 @@ dl {
 }
 
 dt {
+    width: 120px;
+    height: 140px;
+    padding: 0 25px 0 0;
+    border-right: 1px solid #999;
+    color: #343434;
     font-style: italic;
     font-weight: bold;
     font-size: 18px;
     text-align: right;
-    padding: 0 25px 0 0;
-    width: 120px;
-    height: 140px;
-    border-right: 1px solid #999;
-    color: #343434;
 }
 
 dd {
@@ -146,29 +139,19 @@ dd {
 }
 
 hr {
-    border: 0;
     height: 1px;
     margin: 40px 0;
+    border: 0;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
-@keyframes pulse {
+@keyframes pulse { /* only for demo */
     from {
         transform: scale3d(1, 1, 1);
     }
 
     50% {
-        transform: scale3d(1.09, 1.09, 1.09);
-    }
-
-    to {
-        transform: scale3d(1, 1, 1);
-    }
-}
-
-@keyframes pulse2 {
-    from {
-        transform: scale3d(1, 1, 1);
+        transform: scale3d(1.01, 1.01, 1.01);
     }
 
     to {
