@@ -11,7 +11,6 @@ if (typeof window.GimmeStyle === 'undefined') {
             highlightClass: 'selected-GS',
             info: null,
             infoId: 'infoGS',
-            initialized: false,
             prevTarget: null,
             result: '',
             stylesId: 'stylesGS',
@@ -88,7 +87,7 @@ if (typeof window.GimmeStyle === 'undefined') {
 
         handleMouseOver(e) {
             const { pause, freeze } = self.settings;
-            let { highlightClass, initialized, hideClass } = self.constants;
+            let { highlightClass } = self.constants;
 
             if (pause) {
                 self.cleanHighlightClass();
@@ -106,12 +105,6 @@ if (typeof window.GimmeStyle === 'undefined') {
                 self.constants.uniqStyles.clear();
                 self.constants.uniqKeyFrames.clear();
                 self.constants.result = '';
-
-                if (!initialized) {
-                    self.constants.info.classList.remove(hideClass);
-                    self.constants.initialized = true;
-                }
-
                 self.constants.prevTarget = target;
 
                 target.classList.add(highlightClass);
@@ -163,8 +156,29 @@ ${result}`;
                         res.push(...s.cssRules);
                     }
                 } catch (e) { // cross-domain stylesheets with restrictive CORS headers
-                    this.constants.result = `Error: ${e.message}
-If it happens with local files, please restart your browser with flag "--allow-file-access-from-files"!`;
+                    console.log('s.href: ', s.href);
+                    const isUrlSecure = s.href.startsWith('https');
+                    let settings = isUrlSecure ? { mode: 'cors', cache: 'no-store' } : { mode: 'no-cors', cache: 'no-store' };
+
+                    fetch('https://www.patterns.dev/_astro/_...slug_.8c6e531b.css', settings)
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok: ' + response.statusText);
+                            }
+                            return response.text();
+                        })
+                        .then((cssText) => {
+                            const style = document.createElement('style');
+                            style.textContent = cssText;
+                            console.log('cssText: ',cssText);
+                            document.head.appendChild(style);
+                            const cssRules = style.sheet.cssRules;
+                            console.log('cssRules: ',cssRules);
+                            res.push(...cssRules);
+                        })
+                        .catch((error) => console.error('Error:', error));
+                    //                     this.constants.result = `Error: ${e.message}
+                    // If it happens with local files, please restart your browser with flag "--allow-file-access-from-files"!`;
                 }
 
                 return res;
@@ -262,7 +276,7 @@ If it happens with local files, please restart your browser with flag "--allow-f
             return rules.reduce((res, rule) => {
                 const css = rule.cssText;
 
-                if (this.settings.needChildCss) {
+                if (this.settings.needChildCss) { // FIXME: we need it only for copy, not for popup
                     if(this.constants.uniqStyles.has(css)) {
                         return res;
                     }
@@ -432,6 +446,7 @@ ${tempDiv.innerHTML.trim()}
 
             this.addUI();
             this.placeDashboard();
+            this.constants.info.classList.remove(this.constants.hideClass);
             document.querySelector('.destroy-GS').addEventListener('click', this.destroy);
             document.querySelector('.pause-GS').addEventListener('click', this.togglePause);
             document.querySelector('.unlock-GS').addEventListener('click', this.toggleLock);

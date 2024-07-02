@@ -6,6 +6,7 @@ export default [
                 clearTimeout: 'readonly',
                 console: 'readonly',
                 document: 'readonly',
+                fetch: 'readonly',
                 navigator: 'readonly',
                 setTimeout: 'readonly',
                 window: 'readonly',
