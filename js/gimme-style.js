@@ -122,8 +122,14 @@ if (typeof window.GimmeStyle === 'undefined') {
 ----------------
 ${result}`;
 
+                if (self.constants.error) {
+                    result = `${result}
+Error: ${self.constants.error}
+If it happens with local files, please restart your browser with flag "--allow-file-access-from-files".
+Otherwise, it may be because this site uses insecure connection (HTTP) and third-party styles, from a CDN for example. This case is not supported yet.`;
+                }
+
                 self.constants.info.innerText = result.trim(); // Show styles in popup
-                self.constants.error = null; // TODO
             }
         },
 
@@ -155,13 +161,6 @@ ${result}`;
 
         getElStyles(el) {
             const { highlightClass, allRules } = this.constants;
-
-            if (this.constants.error && allRules.length < 1) {
-                return `Error: ${this.constants.error}
-If it happens with local files, please restart your browser with flag "--allow-file-access-from-files".
-Otherwise, it may be because this site uses insecure connection (HTTP) and third-party styles, from a CDN for example. This case is not supported yet.`;
-            }
-
             const defaultRules = [];
             const hoverRules = [];
             const activeRules = [];
