@@ -1,3 +1,6 @@
+// TODO: missed styles like *::before for elements with ::before
+// TODO: combine styles with the same selector
+
 if (typeof window.GimmeStyle === 'undefined') {
     let self = null;
 
@@ -7,6 +10,7 @@ if (typeof window.GimmeStyle === 'undefined') {
             dashboard: null,
             dashboardId: 'dashboardWrapperGS',
             delay: 1600,
+            error: null,
             hideClass: 'hide-GS',
             highlightClass: 'selected-GS',
             info: null,
@@ -101,7 +105,6 @@ if (typeof window.GimmeStyle === 'undefined') {
                 }
 
                 self.constants.prevTarget?.classList.remove(highlightClass);
-
                 self.constants.uniqStyles.clear();
                 self.constants.uniqKeyFrames.clear();
                 self.constants.result = '';
@@ -119,6 +122,7 @@ if (typeof window.GimmeStyle === 'undefined') {
 ${result}`;
 
                 self.constants.info.innerText = result.trim(); // Show styles in popup
+                self.constants.error = null; // TODO
             }
         },
 
@@ -150,39 +154,48 @@ ${result}`;
 
         getElStyles(el) {
             const { highlightClass, stylesId } = this.constants;
+            // FIXME: allRules should be calculated only once!
             const allRules = [...document.styleSheets].reduce((res, s) => {
                 try {
                     if (s.ownerNode.id !== stylesId) {
                         res.push(...s.cssRules);
                     }
                 } catch (e) { // cross-domain stylesheets with restrictive CORS headers
-                    console.log('s.href: ', s.href);
                     const isUrlSecure = s.href.startsWith('https');
                     let settings = isUrlSecure ? { mode: 'cors', cache: 'no-store' } : { mode: 'no-cors', cache: 'no-store' };
 
-                    fetch('https://www.patterns.dev/_astro/_...slug_.8c6e531b.css', settings)
+                    fetch(s.href, settings)
                         .then((response) => {
                             if (!response.ok) {
-                                throw new Error('Network response was not ok: ' + response.statusText);
+                                this.constants.error = e.message;
+                                throw new Error(`Network response was not ok: ${response.statusText}`);
                             }
+
                             return response.text();
                         })
                         .then((cssText) => {
                             const style = document.createElement('style');
+
                             style.textContent = cssText;
-                            console.log('cssText: ',cssText);
                             document.head.appendChild(style);
+
                             const cssRules = style.sheet.cssRules;
-                            console.log('cssRules: ',cssRules);
+
                             res.push(...cssRules);
                         })
-                        .catch((error) => console.error('Error:', error));
-                    //                     this.constants.result = `Error: ${e.message}
-                    // If it happens with local files, please restart your browser with flag "--allow-file-access-from-files"!`;
+                        .catch((er) => {
+                            this.constants.error = er.message;
+                        });
                 }
 
                 return res;
             }, []).flat();
+
+            if (this.constants.error) {
+                return `Error: ${this.constants.error}
+If it happens with local files, please restart your browser with flag "--allow-file-access-from-files".
+Otherwise, it may be because this site uses insecure connection (HTTP) and third-party styles, from a CDN for example. This case is not supported yet.`;
+            }
 
             const defaultRules = [];
             const hoverRules = [];
@@ -197,30 +210,39 @@ ${result}`;
 
             allRules.forEach((rule) => {
                 if (rule.type === window.CSSRule.STYLE_RULE) {
-                    if (el.matches(rule.selectorText)) {
-                        if (rule.selectorText !== `.${highlightClass}`) {
+                    const selectorText = rule.selectorText;
+
+                    // in case selectors like *::before or *::after
+                    if (selectorText.startsWith('::before') || selectorText.startsWith('::after')) {
+                        return;
+                    }
+
+                    const tmpSelectorText = selectorText.replace(/ :/g, ' *:');
+
+                    if (el.matches(selectorText)) {
+                        if (selectorText !== `.${highlightClass}`) {
                             defaultRules.push(rule);
                             allStyleRules.push(rule);
                         }
-                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/([^(])(:hover)\b/g, '$1'))) {
+                    } else if (el.matches(tmpSelectorText.replace(/([^(])(:hover)\b/g, '$1'))) {
                         hoverRules.push(rule);
                         allStyleRules.push(rule);
-                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/([^(])(:active)\b/g, '$1'))) {
+                    } else if (el.matches(tmpSelectorText.replace(/([^(])(:active)\b/g, '$1'))) {
                         activeRules.push(rule);
                         allStyleRules.push(rule);
-                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/([^(])(:visited)\b/g, '$1'))) {
+                    } else if (el.matches(tmpSelectorText.replace(/([^(])(:visited)\b/g, '$1'))) {
                         visitedRules.push(rule);
                         allStyleRules.push(rule);
-                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/([^(])(:focus)\b/g, '$1'))) {
+                    } else if (el.matches(tmpSelectorText.replace(/([^(])(:focus)\b/g, '$1'))) {
                         focusRules.push(rule);
                         allStyleRules.push(rule);
-                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/([^(])(:focus-within)\b/g, '$1'))) {
+                    } else if (el.matches(tmpSelectorText.replace(/([^(])(:focus-within)\b/g, '$1'))) {
                         focusWithinRules.push(rule);
                         allStyleRules.push(rule);
-                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/::before\b/g, ''))) {
+                    } else if (el.matches(tmpSelectorText.replace(/::before\b/g, ''))) {
                         beforeRules.push(rule);
                         allStyleRules.push(rule);
-                    } else if (el.matches(rule.selectorText.replace(/ :/g, ' *:').replace(/::after\b/g, ''))) {
+                    } else if (el.matches(tmpSelectorText.replace(/::after\b/g, ''))) {
                         afterRules.push(rule);
                         allStyleRules.push(rule);
                     }
