@@ -6,6 +6,7 @@ if (typeof window.GimmeStyle === 'undefined') {
 
     window.GimmeStyle = {
         constants: {
+            allRules: [],
             cssGS: '.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box}.dashboard-wrapper-GS{pointer-events:none;font: normal 12px/1.2 Arial, sans-serif}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{box-shadow:rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;position:absolute;top:0;right:5px;z-index:9999;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;width:354px;padding:4px;border:thin solid silver;border-radius:4px;background-color:#fff;color:#383428}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid orange;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer}.copy-option-GS input,.copy-option-GS label{pointer-events:none}.destroy-GS,.pause-GS,.unlock-GS,.about-GS{position:relative;display:block;cursor:pointer}.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before,.about-GS::after,.about-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid orange;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{top:-6px;width:13px;height:9px;margin:0 3px;border:2px solid orange;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:orange}.unlock-GS::after{left:-5px;top:6px;width:20px;height:13px;border-radius:3px;border:2px solid orange}.unlock-GS::before{left:3px;top:10px;width:4px;height:6px;border-radius:2px;border:thin solid white;border-top:4px solid black;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid orange;border-radius:50%}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:50%;background:currentColor;transform:translateX(-50%)}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid orange;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}.info-GS{position:absolute;top:0;left:0;z-index:9999;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#383428;color:#00ff2b;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap;word-break:break-word}.info-GS.locked{border:thin solid orange;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:orange;transform:translateX(-50%)}.info-GS.copied::before{display:block;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.hide-GS{display:none!important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
             dashboard: null,
             dashboardId: 'dashboardWrapperGS',
@@ -153,45 +154,9 @@ ${result}`;
         },
 
         getElStyles(el) {
-            const { highlightClass, stylesId } = this.constants;
-            // FIXME: allRules should be calculated only once!
-            const allRules = [...document.styleSheets].reduce((res, s) => {
-                try {
-                    if (s.ownerNode.id !== stylesId) {
-                        res.push(...s.cssRules);
-                    }
-                } catch (e) { // cross-domain stylesheets with restrictive CORS headers
-                    const isUrlSecure = s.href.startsWith('https');
-                    let settings = isUrlSecure ? { mode: 'cors', cache: 'no-store' } : { mode: 'no-cors', cache: 'no-store' };
+            const { highlightClass, allRules } = this.constants;
 
-                    fetch(s.href, settings)
-                        .then((response) => {
-                            if (!response.ok) {
-                                this.constants.error = e.message;
-                                throw new Error(`Network response was not ok: ${response.statusText}`);
-                            }
-
-                            return response.text();
-                        })
-                        .then((cssText) => {
-                            const style = document.createElement('style');
-
-                            style.textContent = cssText;
-                            document.head.appendChild(style);
-
-                            const cssRules = style.sheet.cssRules;
-
-                            res.push(...cssRules);
-                        })
-                        .catch((er) => {
-                            this.constants.error = er.message;
-                        });
-                }
-
-                return res;
-            }, []).flat();
-
-            if (this.constants.error) {
+            if (this.constants.error && allRules.length < 1) {
                 return `Error: ${this.constants.error}
 If it happens with local files, please restart your browser with flag "--allow-file-access-from-files".
 Otherwise, it may be because this site uses insecure connection (HTTP) and third-party styles, from a CDN for example. This case is not supported yet.`;
@@ -313,7 +278,7 @@ Otherwise, it may be because this site uses insecure connection (HTTP) and third
                 }
 
                 return `${res}${separator}${css
-                    .replace(/^(.*?) {/g, (m) => m.replace(/,\s+/g, ',\n'))
+                    //.replace(/^(.*?) {/g, (m) => m.replace(/,\s+/g, ',\n'))
                     .replace(/(\s+0px)/g, ' 0')
                     .replace(/({ )/g, '{\n  ')
                     .replace(/(; })/g, ';\n}\n\n')
@@ -463,12 +428,52 @@ ${tempDiv.innerHTML.trim()}
             return html;
         },
 
+        prepareAllRules() {
+            this.constants.allRules = [...document.styleSheets].reduce((res, s) => {
+                try {
+                    if (s.ownerNode.id !== this.constants.stylesId) {
+                        res.push(...s.cssRules);
+                    }
+                } catch (e) { // cross-domain stylesheets with restrictive CORS headers
+                    const isUrlSecure = s.href.startsWith('https');
+                    let settings = isUrlSecure ? { mode: 'cors', cache: 'no-store' } : { mode: 'no-cors', cache: 'no-store' };
+
+                    fetch(s.href, settings)
+                        .then((response) => {
+                            if (!response.ok) {
+                                this.constants.error = e.message;
+                                throw new Error(`Network response was not ok: ${response.statusText}`);
+                            }
+
+                            return response.text();
+                        })
+                        .then((cssText) => {
+                            const style = document.createElement('style');
+
+                            style.textContent = cssText;
+                            document.head.appendChild(style);
+
+                            const cssRules = style.sheet.cssRules;
+
+                            this.constants.allRules.push(...cssRules);
+                        })
+                        .catch((er) => {
+                            this.constants.error = er.message;
+                        });
+                }
+
+                return res;
+            }, []);
+        },
+
         init() {
             self = this;
 
             this.addUI();
             this.placeDashboard();
             this.constants.info.classList.remove(this.constants.hideClass);
+            this.prepareAllRules();
+
             document.querySelector('.destroy-GS').addEventListener('click', this.destroy);
             document.querySelector('.pause-GS').addEventListener('click', this.togglePause);
             document.querySelector('.unlock-GS').addEventListener('click', this.toggleLock);
