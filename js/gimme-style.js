@@ -276,6 +276,7 @@ Otherwise, it may be because this site uses insecure connection (HTTP) and third
 
                 return `${res}${separator}${css
                     //.replace(/^(.*?) {/g, (m) => m.replace(/,\s+/g, ',\n'))
+                    .replace(/ \w[-\w]*: ;/g, '') // remove rules without value
                     .replace(/(\s+0px)/g, ' 0')
                     .replace(/({ )/g, '{\n  ')
                     .replace(/(; })/g, ';\n}\n\n')
@@ -461,8 +462,6 @@ ${tempDiv.innerHTML.trim()}
 
                 return res;
             }, []);
-
-            console.log('this.constants.allRules', this.constants.allRules)
         },
 
         init() {
