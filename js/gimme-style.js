@@ -166,7 +166,6 @@ Otherwise, it may be because this site uses insecure connection (HTTP) and third
             const activeRules = [];
             const visitedRules = [];
             const focusRules = [];
-            const focusWithinRules = [];
             const beforeRules = [];
             const afterRules = [];
             const keyframesRules = [];
@@ -197,11 +196,10 @@ Otherwise, it may be because this site uses insecure connection (HTTP) and third
                     } else if (el.matches(tmpSelectorText.replace(/([^(])(:visited)\b/g, '$1'))) {
                         visitedRules.push(rule);
                         allStyleRules.push(rule);
-                    } else if (el.matches(tmpSelectorText.replace(/([^(])(:focus)\b/g, '$1'))) {
+                    } else if (el.matches(tmpSelectorText
+                        .replace(/([^(])(:focus-visible|:focus-within)\b/g, '$1')
+                        .replace(/([^(])(:focus)\b/g, '$1'))) {
                         focusRules.push(rule);
-                        allStyleRules.push(rule);
-                    } else if (el.matches(tmpSelectorText.replace(/([^(])(:focus-within)\b/g, '$1'))) {
-                        focusWithinRules.push(rule);
                         allStyleRules.push(rule);
                     } else if (el.matches(tmpSelectorText.replace(/::before\b/g, ''))) {
                         beforeRules.push(rule);
@@ -250,7 +248,7 @@ Otherwise, it may be because this site uses insecure connection (HTTP) and third
                 defaultStyles = defaultStyles.replace(/}\n\n$/, `    ${inlineStyles}\n}\n\n`);
             }
 
-            let result = [beforeRules, afterRules, hoverRules, activeRules, visitedRules, focusRules, focusWithinRules]
+            let result = [beforeRules, afterRules, hoverRules, activeRules, visitedRules, focusRules]
                 .reduce((res, styles) => {
                     return Boolean(styles) ? `${res}${this.getStylesByRules(styles)}` : res;
                 }, defaultStyles);
@@ -463,6 +461,8 @@ ${tempDiv.innerHTML.trim()}
 
                 return res;
             }, []);
+
+            console.log('this.constants.allRules', this.constants.allRules)
         },
 
         init() {
