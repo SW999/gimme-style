@@ -1,5 +1,4 @@
 // TODO: missed styles like *::before for elements with ::before
-// TODO: combine styles with the same selector
 
 if (typeof window.GimmeStyle === 'undefined') {
     let self = null;
@@ -275,8 +274,8 @@ Otherwise, it may be because this site uses insecure connection (HTTP) and third
                 }
 
                 return `${res}${separator}${css
-                    //.replace(/^(.*?) {/g, (m) => m.replace(/,\s+/g, ',\n'))
-                    .replace(/ \w[-\w]*: ;/g, '') // remove rules without value
+                    // .replace(/^(.*?) {/g, (m) => m.replace(/,\s+/g, ',\n'))
+                    .replace(/ (--)*\w[-\w]*: ;/g, '') // remove rules without value
                     .replace(/(\s+0px)/g, ' 0')
                     .replace(/({ )/g, '{\n  ')
                     .replace(/(; })/g, ';\n}\n\n')
@@ -426,42 +425,92 @@ ${tempDiv.innerHTML.trim()}
             return html;
         },
 
-        prepareAllRules() {
-            this.constants.allRules = [...document.styleSheets].reduce((res, s) => {
+        prepareAllRules: async() => { // FIXME: looks like overkill
+            let _allRules = new Map();
+            const allRules = await Array.from(document.styleSheets).reduce(async(accPromise, s) => {
+                const acc = await accPromise;
+
                 try {
-                    if (s.ownerNode.id !== this.constants.stylesId) {
-                        res.push(...s.cssRules);
+                    if (s.ownerNode.id !== self.constants.stylesId) {
+                        const cssArr = Array.from(s.cssRules).flat().map((rule) => {
+                            const { selectorText, cssText, type, style, name } = rule;
+                            return { selectorText, cssText, type, style, name };
+                        });
+
+                        acc.push(...cssArr);
                     }
                 } catch (e) { // cross-domain stylesheets with restrictive CORS headers
                     const isUrlSecure = s.href.startsWith('https');
                     let settings = isUrlSecure ? { mode: 'cors', cache: 'no-store' } : { mode: 'no-cors', cache: 'no-store' };
 
-                    fetch(s.href, settings)
-                        .then((response) => {
-                            if (!response.ok) {
-                                this.constants.error = e.message;
-                                throw new Error(`Network response was not ok: ${response.statusText}`);
-                            }
+                    try {
+                        const data = await self.fetchStylesheet(s.href, settings, e);
 
-                            return response.text();
-                        })
-                        .then((cssText) => {
-                            const style = document.createElement('style');
-
-                            style.textContent = cssText;
-                            document.head.appendChild(style);
-
-                            const cssRules = style.sheet.cssRules;
-
-                            this.constants.allRules.push(...cssRules);
-                        })
-                        .catch((er) => {
-                            this.constants.error = er.message;
-                        });
+                        acc.push(...data);
+                    } catch (fetchError) {}
                 }
 
-                return res;
-            }, []);
+                return acc;
+            }, Promise.resolve([]));
+
+            // Combine rules with equal selector
+            allRules.forEach((rule) => {
+                const selectorText = rule.selectorText ?? rule.name;
+                let rules = _allRules.get(selectorText);
+
+                if (!selectorText) {
+                    return;
+                }
+
+                if (rules) { // Existed selector. Have to add new rules
+                    // Get rules without selector
+                    const newRules = rule.cssText
+                        .replace(/.*\{([^}]+)}.*/, '$1')
+                        .replace(/;+\s*/g, ';').trim().split(/(?<=;)/g);
+                    const oldRules = rules.cssText
+                        .replace(/.*\{([^}]+)}.*/, '$1')
+                        .replace(/;+\s*/g, ';').trim().split(/(?<=;)/g);
+                    const zeroRule = rules.cssText.replace(/\{([^}]+)}/, '{}');
+                    // Get rid of repeated rules with the same value
+                    let currentCssText = [...new Set([...oldRules, ...newRules])].join(' ');
+                    // Add new rules for existed selector
+                    currentCssText = zeroRule.replace('{}', `{ ${currentCssText} }`);
+                    _allRules.set(selectorText, { ...rules, cssText: currentCssText });
+                } else { // New selector
+                    _allRules.set(selectorText, rule);
+                }
+            });
+
+            return [..._allRules.values()];
+        },
+
+        fetchStylesheet: async(url, settings, error) => {
+            try {
+                const response = await fetch(url, settings);
+
+                if (!response.ok) {
+                    self.constants.error = error.message;
+
+                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                }
+
+                const data = await response.text();
+                const _style = document.createElement('style');
+
+                _style.textContent = data;
+                document.head.appendChild(_style);
+
+                const cssRules = Array.from(_style.sheet.cssRules).flat().map((rule) => {
+                    const { selectorText, cssText, type, style, name } = rule;
+                    return { selectorText, cssText, type, style, name };
+                });
+
+                return cssRules;
+            } catch (e) {
+                self.constants.error = e.message;
+
+                throw new Error(e);
+            }
         },
 
         init() {
@@ -470,7 +519,9 @@ ${tempDiv.innerHTML.trim()}
             this.addUI();
             this.placeDashboard();
             this.constants.info.classList.remove(this.constants.hideClass);
-            this.prepareAllRules();
+            this.prepareAllRules().then((result) => {
+                this.constants.allRules = result;
+            });
 
             document.querySelector('.destroy-GS').addEventListener('click', this.destroy);
             document.querySelector('.pause-GS').addEventListener('click', this.togglePause);
