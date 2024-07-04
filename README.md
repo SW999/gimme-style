@@ -2,6 +2,8 @@
 
 Effortlessly investigate the CSS styles of any hovered element on any site with **GimmeStyle**.
 Additionally, you can copy the CSS, along with CSS of the children elements and HTML code, with just one click.
+
+
 [![demo](https://github.com/SW999/gimme-style/assets/3176886/1d07f1fd-ad78-4a2d-987b-9844ba61c3c1)](https://sw999.github.io/gimme-style/)
 
 ## Usage
