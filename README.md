@@ -8,7 +8,7 @@ Additionally, you can copy the CSS, along with CSS of the children elements and 
 
 ## Usage
 
-Just drag **GimmeStyle** button from [Demo page](https://sw999.github.io/gimme-style/) to the bookmark's panel of your browser.
+Just drag **GimmeStyle** button from the [Demo page](https://sw999.github.io/gimme-style/) to the bookmarks panel of your browser.
 Click on this bookmark will activate *GimmeStyle* script on any page.
 
 # Features
