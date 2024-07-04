@@ -22,7 +22,7 @@ body {
 }
 
 .vcard {
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 }
 
 h1 {
@@ -82,19 +82,19 @@ summary {
     cursor: pointer;
 }
 
-a {
+a:not(.demo *) {
     border-bottom: 1px dotted #999;
     color: #999;
     text-decoration: none;
 }
 
-a:before { /* only for demo */
+a:not(.demo *):before { /* only for demo */
     border-bottom: 1px dotted #999;
     color: #999;
     text-decoration: none;
 }
 
-a:hover {
+a:not(.demo *):hover {
     display: inline-block;
     border-bottom-style: solid;
     color: black;
@@ -143,6 +143,32 @@ hr {
     margin: 40px 0;
     border: 0;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.demo {
+    width: 450px;
+    height: 125px;
+    margin: 0 auto 25px;
+    padding: 10px;
+    border: 3px dashed orange;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.demo:hover, .demo a:hover {
+    outline: none !important;
+}
+
+.demo a {
+    display: block;
+    width: 105px;
+    margin: 10px auto 0;
+    padding: 7px;
+    color: white;
+    background-color: darkgreen;
+    border-radius: 4px;
+    text-decoration: none;
 }
 
 @keyframes pulse { /* only for demo */
