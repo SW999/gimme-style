@@ -126,7 +126,7 @@ ${result}`;
                     result = `${result}
 Error: ${self.constants.error}
 If it happens with local files, please restart your browser with flag "--allow-file-access-from-files".
-Otherwise, it may be because this site uses insecure connection (HTTP) and third-party styles, from a CDN for example. This case is not supported yet.`;
+Otherwise, it may be CORS issue related to third-party styles, from a CDN for example. This case is not supported yet.`;
                 }
 
                 self.constants.info.innerHTML = result.trim(); // Show styles in popup
