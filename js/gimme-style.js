@@ -130,7 +130,7 @@ Otherwise, it may be CORS issue related to third-party styles, from a CDN for ex
                 }
 
                 self.constants.info.innerHTML = result.trim(); // Show styles in popup
-                setTimeout(() => self.movePopup(target), 500); // Add new position to popup
+                self.movePopup(target); // Add new position to popup
             }
         },
 
