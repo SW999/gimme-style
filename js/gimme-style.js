@@ -188,18 +188,18 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
                             defaultRules.push(rule);
                             allStyleRules.push(rule);
                         }
-                    } else if (el.matches(tmpSelectorText.replace(/([^(])(:hover)\b/g, '$1'))) {
+                    } else if (el.matches(tmpSelectorText.replace(/([^(\\])(:hover)\b/g, '$1'))) {
                         hoverRules.push(rule);
                         allStyleRules.push(rule);
-                    } else if (el.matches(tmpSelectorText.replace(/([^(])(:active)\b/g, '$1'))) {
+                    } else if (el.matches(tmpSelectorText.replace(/([^(\\])(:active)\b/g, '$1'))) {
                         activeRules.push(rule);
                         allStyleRules.push(rule);
-                    } else if (el.matches(tmpSelectorText.replace(/([^(])(:visited)\b/g, '$1'))) {
+                    } else if (el.matches(tmpSelectorText.replace(/([^(\\])(:visited)\b/g, '$1'))) {
                         visitedRules.push(rule);
                         allStyleRules.push(rule);
                     } else if (el.matches(tmpSelectorText
-                        .replace(/([^(])(:focus-visible|:focus-within)\b/g, '$1')
-                        .replace(/([^(])(:focus)\b/g, '$1'))) {
+                        .replace(/([^(\\])(:focus-visible|:focus-within)\b/g, '$1')
+                        .replace(/([^(\\])(:focus)\b/g, '$1'))) {
                         focusRules.push(rule);
                         allStyleRules.push(rule);
                     } else if (el.matches(tmpSelectorText.replace(/::before\b/g, ''))) {
