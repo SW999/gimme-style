@@ -1,5 +1,6 @@
-// TODO: missed styles like *::before for elements with ::before
-// TODO: read @media
+// TODO: missed styles starts from *::before or *::after
+// TODO: combine rules for the same @media
+// TODO: popup adds horizontal scrollbar in some cases
 
 if (typeof window.GimmeStyle === 'undefined') {
     let self = null;
@@ -7,7 +8,9 @@ if (typeof window.GimmeStyle === 'undefined') {
     window.GimmeStyle = {
         constants: {
             allRules: [],
-            cssGS: 'html{scrollbar-color:unset}.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box;margin:0;padding:0;font:normal 12px/1.2 Arial,sans-serif}.dashboard-wrapper-GS{pointer-events:none}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{box-shadow:rgba(0,0,0,0.16) 0 3px 6px,rgba(0,0,0,0.23) 0 3px 6px;position:absolute;top:0;right:5px;z-index:9999;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;width:354px;padding:4px;border:thin solid silver;border-radius:4px;background-color:#fff;color:#282a36}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid #ffb86c;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer}.copy-option-GS input,.copy-option-GS label{pointer-events:none}.destroy-GS,.pause-GS,.unlock-GS,.about-GS{position:relative;display:block;cursor:pointer}.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before,.about-GS::after,.about-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid #ffb86c;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{top:-6px;width:13px;height:9px;margin:0 3px;border:2px solid #ffb86c;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:#ffb86c}.unlock-GS::after{left:-5px;top:6px;width:20px;height:13px;border-radius:3px;border:2px solid #ffb86c}.unlock-GS::before{left:3px;top:10px;width:4px;height:6px;border-radius:2px;border:thin solid white;border-top:4px solid black;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid #ffb86c;border-radius:50%}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:50%;background:currentColor;transform:translateX(-50%)}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid #ffb86c;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}pre.info-GS{position:absolute;top:0;left:0;z-index:9999;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#282a36;color:#f1fa8c;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap;word-break:break-word}pre.info-GS:empty{display:none}.info-GS.locked{border:thin solid #ffb86c;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:#ffb86c;transform:translateX(-50%)}.info-GS.copied::before{display:block;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.info-selector-GS{color:#ff79c6}.info-delimiter-GS{color:#f8f8f2}.info-rules-GS{color:#50fa7b}.hide-GS{display:none !important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
+            allMediaRules: [],
+            allKeyframeRules: [],
+            cssGS: 'html{scrollbar-color:unset}.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box;margin:0;padding:0;font:normal 12px/1.2 Arial,sans-serif}.dashboard-wrapper-GS{pointer-events:none}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{box-shadow:rgba(0,0,0,0.16) 0 3px 6px,rgba(0,0,0,0.23) 0 3px 6px;position:absolute;top:0;right:5px;z-index:9999;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;width:354px;padding:4px;border:thin solid silver;border-radius:4px;background-color:#fff;color:#282a36}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid #ffb86c;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer}.copy-option-GS input,.copy-option-GS label{pointer-events:none}.destroy-GS,.pause-GS,.unlock-GS,.about-GS{position:relative;display:block;cursor:pointer}.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before,.about-GS::after,.about-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid #ffb86c;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{top:-6px;width:13px;height:9px;margin:0 3px;border:2px solid #ffb86c;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:#ffb86c}.unlock-GS::after{left:-5px;top:6px;width:20px;height:13px;border-radius:3px;border:2px solid #ffb86c}.unlock-GS::before{left:3px;top:10px;width:4px;height:6px;border-radius:2px;border:thin solid white;border-top:4px solid black;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid #ffb86c;border-radius:50%}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:50%;background:currentColor;transform:translateX(-50%)}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid #ffb86c;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}pre.info-GS{position:absolute;top:0;left:0;z-index:9999;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#282a36;color:#f1fa8c;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap;word-break:break-word}pre.info-GS:empty{display:none}.info-GS.locked{border:thin solid #ffb86c;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:#ffb86c;transform:translateX(-50%)}.info-GS.copied::before{display:block;width:86px;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.info-selector-GS{color:#ff79c6}.info-delimiter-GS{color:#f8f8f2}.info-comment-GS{color:#6272A4}.info-rules-GS{color:#50fa7b}.hide-GS{display:none !important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
             dashboard: null,
             dashboardId: 'dashboardWrapperGS',
             delay: 1600,
@@ -105,6 +108,8 @@ if (typeof window.GimmeStyle === 'undefined') {
                     return;
                 }
 
+                const { offsetWidth, offsetHeight } = target;
+
                 self.constants.prevTarget?.classList.remove(highlightClass);
                 self.constants.uniqStyles.clear();
                 self.constants.uniqKeyFrames.clear();
@@ -118,8 +123,9 @@ if (typeof window.GimmeStyle === 'undefined') {
                 self.constants.result = result;
                 result = result
                     .replace(/{/g, '<span class="info-delimiter-GS">{</span><span class="info-rules-GS">')
+                    .replace(/\/\* Inline styles \*\//g, '  <span class="info-comment-GS">/*  Inline styles */</span>')
                     .replace(/}/g, '</span><span class="info-delimiter-GS">}</span>');
-                result = `<span class="info-selector-GS">${self.getSelectorName(target)}    ${target.offsetWidth}×${target.offsetHeight}px</span>
+                result = `<span class="info-selector-GS">${self.getSelectorName(target)}${offsetHeight ? `    ${offsetWidth}×${offsetHeight}px` : ''}</span>
 <span class="info-delimiter-GS">----------------</span>
 ${result}`;
 
@@ -161,67 +167,15 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
         },
 
         getElStyles(el) {
-            const { highlightClass, allRules } = this.constants;
-            const defaultRules = [];
-            const hoverRules = [];
-            const activeRules = [];
-            const visitedRules = [];
-            const focusRules = [];
-            const beforeRules = [];
-            const afterRules = [];
-            const keyframesRules = [];
-            const allStyleRules = [];
+            const { allRules, allKeyframeRules, allMediaRules } = this.constants;
+            const elRules = this.getSeparatedRules(el, allRules);
+            const elMediaRules = this.getSeparatedRules(el, allMediaRules);
+            const mediaResult = this.prepareStylesString(elMediaRules, '');
+            const inlineStyles = (el.getAttribute('style') ?? '').trim();
+            let result = this.prepareStylesString(elRules, inlineStyles);
 
-            allRules.forEach((rule) => {
-                if (rule.type === window.CSSRule.STYLE_RULE) {
-                    const selectorText = rule.selectorText;
-
-                    // in case selectors like *::before or *::after
-                    if (selectorText.startsWith('::before') || selectorText.startsWith('::after')) {
-                        return;
-                    }
-
-                    const tmpSelectorText = selectorText.replace(/ :/g, ' *:');
-
-                    if (el.matches(selectorText)) {
-                        if (selectorText !== `.${highlightClass}`) {
-                            defaultRules.push(rule);
-                            allStyleRules.push(rule);
-                        }
-                    } else if (el.matches(tmpSelectorText.replace(/([^(\\])(:hover)\b/g, '$1'))) {
-                        hoverRules.push(rule);
-                        allStyleRules.push(rule);
-                    } else if (el.matches(tmpSelectorText.replace(/([^(\\])(:active)\b/g, '$1'))) {
-                        activeRules.push(rule);
-                        allStyleRules.push(rule);
-                    } else if (el.matches(tmpSelectorText.replace(/([^(\\])(:visited)\b/g, '$1'))) {
-                        visitedRules.push(rule);
-                        allStyleRules.push(rule);
-                    } else if (el.matches(tmpSelectorText
-                        .replace(/([^(\\])(:focus-visible|:focus-within)\b/g, '$1')
-                        .replace(/([^(\\])(:focus)\b/g, '$1'))) {
-                        focusRules.push(rule);
-                        allStyleRules.push(rule);
-                    } else if (el.matches(tmpSelectorText.replace(/::before\b/g, ''))) {
-                        beforeRules.push(rule);
-                        allStyleRules.push(rule);
-                    } else if (el.matches(tmpSelectorText.replace(/::after\b/g, ''))) {
-                        afterRules.push(rule);
-                        allStyleRules.push(rule);
-                    }
-                } else if (rule.type === window.CSSRule.KEYFRAMES_RULE) {
-                    keyframesRules.push(rule);
-                }
-            });
-
-            const animationNames = allStyleRules.reduce((res, rule) => {
-                if (rule.style.animationName) {
-                    res.push(rule.style.animationName);
-                }
-                return res;
-            }, []);
-            const keyframeStyles = keyframesRules.reduce((res, rule) => {
-                if (animationNames.includes(rule.name)) {
+            const keyframeStyles = allKeyframeRules.reduce((res, rule) => {
+                if (elRules.animationNames.includes(rule.name)) {
                     const css = rule.cssText;
                     if (this.constants.uniqKeyFrames.has(css)) {
                         return res;
@@ -235,31 +189,15 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
                 return res;
             }, '');
 
-            let defaultStyles = this.getStylesByRules(defaultRules);
+            result = result === '' ? '' : `${result}${keyframeStyles}`;
 
-            let inlineStyles = (el.getAttribute('style') ?? '').trim();
-
-            // Add inline styles
-            if (inlineStyles !== '') {
-                inlineStyles = inlineStyles
-                    .replace(/:\s*/g, ': ')
-                    .replace(/;?$/, ';')
-                    .replace(/;\s*(?!$)/g, ';\n    ');
-
-                defaultStyles = defaultStyles.replace(/}\n\n$/, `    ${inlineStyles}\n}\n\n`);
-            }
-
-            let result = [beforeRules, afterRules, hoverRules, activeRules, visitedRules, focusRules]
-                .reduce((res, styles) => {
-                    return Boolean(styles) ? `${res}${this.getStylesByRules(styles)}` : res;
-                }, defaultStyles);
-
-            return result === '' ? '' : `${result}${keyframeStyles}`;
+            return result + mediaResult;
         },
 
         getStylesByRules(rules) {
             return rules.reduce((res, rule) => {
                 const css = rule.cssText;
+                const media = rule.media;
 
                 if (this.constants.uniqStyles.has(css)) {
                     return res;
@@ -268,18 +206,28 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
                 this.constants.uniqStyles.add(css);
 
                 let separator = '\n    ';
+                let postfix = '';
 
                 if (res === '' || res.endsWith('}\n\n')) {
                     separator = '';
                 }
 
+                if (media) {
+                    separator = `@media ${media} {\n    `;
+                    postfix = '\n}\n\n';
+                }
+
+                const ruleAfter = media ? ';\n    }' : ';\n}\n\n';
+                const nextLine = media ? ';\n      ' : ';\n  ';
+                const firstLine = media ? '{\n      ' : '{\n  ';
+
                 return `${res}${separator}${css
                     // .replace(/^(.*?) {/g, (m) => m.replace(/,\s+/g, ',\n'))
-                    .replace(/ (--)*\w[-\w]*: ;/g, '') // remove rules without value
+                    .replace(/\s+(--)*\w[-\w]*: ;/g, '') // remove rules without value
                     .replace(/(\s+0px)/g, ' 0')
-                    .replace(/({ )/g, '{\n  ')
-                    .replace(/(; })/g, ';\n}\n\n')
-                    .replace(/(; )/g, ';\n  ')}`;
+                    .replace(/({\s+)/g, firstLine)
+                    .replace(/(;\s+)/g, nextLine)
+                    .replace(/(;\s+})/g, ruleAfter)}${postfix}`;
             }, '');
         },
 
@@ -389,7 +337,7 @@ ${html}`;
                 return '';
             }
 
-            if (el.className && el.className !== highlightClass) {
+            if (el.className && typeof el.className === 'string' && el.className !== highlightClass) {
                 const re = new RegExp(`(\\s+${highlightClass})`, 'g');
                 selector = `${selector}.${el.className.replace(re, '').replace(/\s+/g, '.')}`;
             } else if (el.id) {
@@ -427,54 +375,54 @@ ${tempDiv.innerHTML.trim()}
 
         async prepareAllRules() { // TODO: looks overkill
             let _allRules = new Map();
-            const allRules = await Array.from(document.styleSheets).reduce(async(accPromise, s) => {
-                const acc = await accPromise;
+            let allRules = await Array.from(document.styleSheets)
+                .reduce(async(accPromise, s) => {
+                    const acc = await accPromise;
 
-                try {
-                    if (s.ownerNode.id !== self.constants.stylesId) {
-                        const cssArr = Array.from(s.cssRules).flat().map((rule) => {
-                            const { selectorText, cssText, type, style, name } = rule;
-                            return { selectorText, cssText, type, style, name };
-                        });
+                    try {
+                        if (s.ownerNode.id !== self.constants.stylesId) {
+                            const cssArr = self.getCssRulesFromSheet(s.cssRules);
 
-                        acc.push(...cssArr);
+                            acc.push(...cssArr);
+                        }
+                    } catch (e) { // cross-domain stylesheets with restrictive CORS headers
+                        const isUrlSecure = s.href.startsWith('https');
+                        let settings = isUrlSecure ? { mode: 'cors', cache: 'no-store' } : { mode: 'no-cors', cache: 'no-store' };
+
+                        try { // Workaround in case we can't read external css
+                            const data = await self.fetchStylesheet(s.href, settings, e);
+
+                            acc.push(...data);
+                        } catch (_) {}
                     }
-                } catch (e) { // cross-domain stylesheets with restrictive CORS headers
-                    const isUrlSecure = s.href.startsWith('https');
-                    let settings = isUrlSecure ? { mode: 'cors', cache: 'no-store' } : { mode: 'no-cors', cache: 'no-store' };
 
-                    try { // Workaround in case we can't read external css
-                        const data = await self.fetchStylesheet(s.href, settings, e);
+                    return acc;
+                }, Promise.resolve([]));
 
-                        acc.push(...data);
-                    } catch (fetchError) {}
-                }
-
-                return acc;
-            }, Promise.resolve([]));
-
-            // Combine rules with equal selector
+            // Combine rules with have equal selector
             allRules.forEach((rule) => { // TODO: is it possible to move it to previous loop?
-                const selectorText = rule.selectorText ?? rule.name;
-                let rules = _allRules.get(selectorText);
+                const selectorText = rule.selectorText || rule.name || rule.conditionText;
 
                 if (!selectorText) {
                     return;
                 }
 
+                let rules = _allRules.get(selectorText);
+
                 if (rules) { // Existed selector. Have to add new rules
                     // Get rules without selector
                     const newRules = rule.cssText
                         .replace(/.*\{([^}]+)}.*/, '$1')
-                        .replace(/;+\s*/g, ';').trim().split(/(?<=;)/g);
+                        .replace(/;+\s*/g, ';').trim()
+                        .split(/(?<=;)/g); // split by empty string only after ';'
                     const oldRules = rules.cssText
                         .replace(/.*\{([^}]+)}.*/, '$1')
                         .replace(/;+\s*/g, ';').trim().split(/(?<=;)/g);
-                    const zeroRule = rules.cssText.replace(/\{([^}]+)}/, '{}');
+                    const selector = rules.cssText.replace(/\{([^}]+)}/, '{}');
                     // Get rid of repeated rules with the same value
                     let currentCssText = [...new Set([...oldRules, ...newRules])].join(' ');
                     // Add new rules for existed selector
-                    currentCssText = zeroRule.replace('{}', `{ ${currentCssText} }`);
+                    currentCssText = selector.replace('{}', `{ ${currentCssText} }`);
                     _allRules.set(selectorText, { ...rules, cssText: currentCssText });
                 } else { // New selector
                     _allRules.set(selectorText, rule);
@@ -502,17 +450,110 @@ ${tempDiv.innerHTML.trim()}
                 _style.textContent = data;
                 document.head.appendChild(_style);
 
-                const cssRules = Array.from(_style.sheet.cssRules).flat().map((rule) => {
-                    const { selectorText, cssText, type, style, name } = rule;
-                    return { selectorText, cssText, type, style, name };
-                });
-
-                return cssRules;
+                return self.getCssRulesFromSheet(_style.sheet.cssRules);
             } catch (e) {
                 self.constants.error = e.message;
 
                 throw new Error(e);
             }
+        },
+
+        getSeparatedRules(el, rules) {
+            const { highlightClass } = this.constants;
+            let activeRules = [], afterRules = [], animationNames = [], beforeRules = [], defaultRules = [], focusRules = [], hoverRules = [], visitedRules = [];
+
+            function addAnimationName(name) {
+                if (name) {
+                    animationNames.push(name);
+                }
+            }
+
+            rules.forEach((rule) => {
+                if (rule.type === window.CSSRule.STYLE_RULE) {
+                    const selectorText = rule.selectorText;
+
+                    // in case selector starts with *::before or *::after
+                    if (selectorText.startsWith('::before') || selectorText.startsWith('::after')) {
+                        return;
+                    }
+
+                    const tmpSelectorText = selectorText.replace(/ :/g, ' *:');
+                    const name = rule.style.animationName;
+
+                    if (el.matches(selectorText)) {
+                        if (selectorText !== `.${highlightClass}`) {
+                            defaultRules.push(rule);
+                            addAnimationName(name);
+                        }
+                    } else if (el.matches(tmpSelectorText.replace(/([^\\(])(:hover)\b/g, '$1'))) {
+                        hoverRules.push(rule);
+                        addAnimationName(name);
+                    } else if (el.matches(tmpSelectorText.replace(/([^\\(])(:active)\b/g, '$1'))) {
+                        activeRules.push(rule);
+                        addAnimationName(name);
+                    } else if (el.matches(tmpSelectorText.replace(/([^\\(])(:visited)\b/g, '$1'))) {
+                        visitedRules.push(rule);
+                        addAnimationName(name);
+                    } else if (el.matches(tmpSelectorText
+                        .replace(/([^\\(])(:focus-visible|:focus-within)\b/g, '$1')
+                        .replace(/([^\\(])(:focus)\b/g, '$1'))) {
+                        focusRules.push(rule);
+                        addAnimationName(name);
+                    } else if (el.matches(tmpSelectorText.replace(/::before\b/g, ''))) {
+                        beforeRules.push(rule);
+                        addAnimationName(name);
+                    } else if (el.matches(tmpSelectorText.replace(/::after\b/g, ''))) {
+                        afterRules.push(rule);
+                        addAnimationName(name);
+                    }
+                }
+            });
+
+            return { activeRules, afterRules, animationNames, beforeRules, defaultRules, focusRules, hoverRules, visitedRules };
+        },
+
+        prepareStylesString(rules, inlineStyles) {
+            const { defaultRules, beforeRules, afterRules, hoverRules, activeRules, visitedRules, focusRules } = rules;
+            let _inlineStyles = inlineStyles;
+            let defaultStyles = this.getStylesByRules(defaultRules);
+
+            // Add inline styles
+            if (_inlineStyles !== '') {
+                _inlineStyles = _inlineStyles
+                    .replace(/:\s*/g, ': ')
+                    .replace(/;?$/, ';')
+                    .replace(/;\s*(?!$)/g, ';\n  ');
+
+                defaultStyles = defaultStyles.replace(/}\n\n$/, `/* Inline styles */\n  ${_inlineStyles}\n}\n\n`);
+            }
+
+            const result = [beforeRules, afterRules, hoverRules, activeRules, visitedRules, focusRules]
+                .reduce((res, styles) => {
+                    return Boolean(styles) ? `${res}${this.getStylesByRules(styles)}` : res;
+                }, defaultStyles);
+
+            return result;
+        },
+
+        getCssRulesFromSheet(rules) {
+            return Array.from(rules).flat().map((rule) => {
+                let { selectorText, cssText, type, style, name, media, conditionText, cssRules = [] } = rule;
+
+                if (cssRules.length > 0) {
+                    if (type === window.CSSRule.MEDIA_RULE) {
+                        cssRules = Array.from(cssRules).map((r) => {
+                            const { selectorText, cssText, type, style } = r;
+                            return { selectorText, cssText, type, style, media: conditionText };
+                        });
+
+                        this.constants.allMediaRules.push({ conditionText, cssRules, cssText, type });
+                    } else if (rule.type === window.CSSRule.KEYFRAMES_RULE) {
+                        this.constants.allKeyframeRules.push({ cssText, name });
+                    }
+                }
+
+                return { selectorText, cssText, type, style, name, media, conditionText, cssRules };
+            });
         },
 
         init() {
@@ -522,6 +563,7 @@ ${tempDiv.innerHTML.trim()}
             this.placeDashboard();
             this.prepareAllRules().then((result) => {
                 this.constants.allRules = result;
+                this.constants.allMediaRules = this.constants.allMediaRules.map((m) => m.cssRules).flat();
             });
 
             document.querySelector('.destroy-GS').addEventListener('click', this.destroy);

@@ -20,14 +20,15 @@ Click on this bookmark will activate *GimmeStyle* script on any page.
 
 * Nothing to install, just simple bookmarklet
 * Zero dependencies. Made via JavaScript
-* Combined rules for the same selector
+* Merged rules for the same selector
 * Includes inline styles
 * Easy way to copy interesting styles and HTML (including children styles)
 
 # Known issues
 
 * Missed styles starts from *::before or *::after
-* Missed styles inside @media
+* Popup adds horizontal scrollbar in some cases
+* Rules for the same breakpoint are not merged
 
 ## License
 
