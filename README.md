@@ -26,6 +26,7 @@ The second click on the bookmark (esc or button with a cross) will close *GimmeS
 * Nothing to install, just simple bookmarklet
 * Zero dependencies. Made via JavaScript
 * It merges rules for the same selector
+* It merges rules for the same selector in same @media
 * It adds inline styles
 * Easy way to copy interesting styles and HTML (including children styles)
 
@@ -33,7 +34,6 @@ The second click on the bookmark (esc or button with a cross) will close *GimmeS
 
 * Missed styles starts from *::before or *::after
 * Popup adds horizontal scrollbar in some cases
-* Rules for the same breakpoint are not merged
 
 ## License
 
