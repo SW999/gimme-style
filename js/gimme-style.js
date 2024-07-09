@@ -10,7 +10,7 @@ if (typeof window.GimmeStyle === 'undefined') {
             allRules: [],
             allMediaRules: [],
             allKeyframeRules: [],
-            cssGS: 'html{scrollbar-color:unset}.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box;margin:0;padding:0;font:normal 12px/1.2 Arial,sans-serif}.dashboard-wrapper-GS{pointer-events:none}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{box-shadow:rgba(0,0,0,0.16) 0 3px 6px,rgba(0,0,0,0.23) 0 3px 6px;position:absolute;top:0;right:5px;z-index:9999;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;width:354px;padding:4px;border:thin solid silver;border-radius:4px;background-color:#fff;color:#282a36}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid #ffb86c;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer}.copy-option-GS input,.copy-option-GS label{pointer-events:none}.destroy-GS,.pause-GS,.unlock-GS,.about-GS{position:relative;display:block;cursor:pointer}.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before,.about-GS::after,.about-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid #ffb86c;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{top:-6px;width:13px;height:9px;margin:0 3px;border:2px solid #ffb86c;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:#ffb86c}.unlock-GS::after{left:-5px;top:6px;width:20px;height:13px;border-radius:3px;border:2px solid #ffb86c}.unlock-GS::before{left:3px;top:10px;width:4px;height:6px;border-radius:2px;border:thin solid white;border-top:4px solid black;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid #ffb86c;border-radius:50%}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:50%;background:currentColor;transform:translateX(-50%)}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid #ffb86c;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}pre.info-GS{position:absolute;top:0;left:0;z-index:9999;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#282a36;color:#f1fa8c;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap;word-break:break-word}pre.info-GS:empty{display:none}.info-GS.locked{border:thin solid #ffb86c;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:#ffb86c;transform:translateX(-50%)}.info-GS.copied::before{display:block;width:86px;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.info-selector-GS{color:#ff79c6}.info-delimiter-GS{color:#f8f8f2}.info-comment-GS{color:#6272A4}.info-rules-GS{color:#50fa7b}.hide-GS{display:none !important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
+            cssGS: 'html{scrollbar-color:unset}.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box;margin:0;padding:0;font:normal 12px/1.2 Arial,sans-serif}.dashboard-wrapper-GS{pointer-events:none}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{box-shadow:rgba(0,0,0,0.16) 0 3px 6px,rgba(0,0,0,0.23) 0 3px 6px;position:absolute;top:0;right:5px;z-index:9999;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;width:354px;padding:4px;border:thin solid silver;border-radius:4px;background-color:#fff;color:#282a36}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid #ffb86c;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer;user-select:none}.check-GS{position:relative;width:13px;height:13px;border:thin solid;border-radius:2px}.check-GS.checked-GS::after{left:2px;top:-1px;width:4px;height:7px;border-width:0 1px 1px 0;border-style:solid;border-color:blue;transform-origin:bottom left;transform:rotate(45deg)}.destroy-GS,.pause-GS,.unlock-GS,.about-GS{position:relative;display:block;cursor:pointer}.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before,.about-GS::after,.about-GS::before,.check-GS.checked-GS::after{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid #ffb86c;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{top:-6px;width:13px;height:9px;margin:0 3px;border:2px solid #ffb86c;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:#ffb86c}.unlock-GS::after{left:-5px;top:6px;width:20px;height:13px;border-radius:3px;border:2px solid #ffb86c}.unlock-GS::before{left:3px;top:10px;width:4px;height:6px;border-radius:2px;border:thin solid white;border-top:4px solid black;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid #ffb86c;border-radius:50%}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:50%;background:currentColor;transform:translateX(-50%)}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid #ffb86c;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}pre.info-GS{position:absolute;top:0;left:0;z-index:9999;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#282a36;color:#f1fa8c;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap;word-break:break-word}pre.info-GS:empty{display:none}.info-GS.locked{border:thin solid #ffb86c;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:#ffb86c;transform:translateX(-50%)}.info-GS.copied::before{display:block;width:86px;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.info-selector-GS{color:#ff79c6}.info-delimiter-GS{color:#f8f8f2}.info-comment-GS{color:#6272A4}.info-rules-GS{color:#50fa7b}.hide-GS{display:none !important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
             dashboard: null,
             dashboardId: 'dashboardWrapperGS',
             delay: 1600,
@@ -39,10 +39,9 @@ if (typeof window.GimmeStyle === 'undefined') {
             const dashboard = document.createElement('div');
             dashboard.id = dashboardId;
             dashboard.className = 'dashboard-wrapper-GS';
-            dashboard.innerHTML = `<div class="dashboard-GS" id="dashboard-GS"><div class="about-GS" title="Toggle About section"></div><div class="copy-option-GS" title="Copy CSS of all children"><input type="checkbox" id="copyCss" value="needChildCss" /><label for="copyCss">Copy childs' CSS</label></div><div class="copy-option-GS" title="Copy inner HTML"><input type="checkbox" id="copyHtml" value="needHtml" /><label for="copyHtml">Copy HTML</label></div><div class="unlock-GS" title="Feeze tooltip on click"></div><div class="pause-GS" title="Pause"></div><div class="destroy-GS" title="Close"></div><div class="about-info-GS hide-GS"><strong>Gimme Style</strong> helps to check and copy an element's CSS styles. Hover the cursor on the element to see CSS, and click to copy.<br/><br/>Click the '<strong>lock</strong>' icon and a popup with CSS will be frozen after clicking on the element. The second click on the '<strong>lock</strong>' icon will unfreeze a popup.<br/><br/>In addition, you may copy the HTML code and CSS of element children on demand.</div>
+            dashboard.innerHTML = `<div class="dashboard-GS" id="dashboard-GS"><div class="about-GS" title="Toggle About section"></div><div class="copy-option-GS" title="Copy CSS of all children" data-value="needChildCss"><div class="check-GS"></div><span>Copy childs' CSS</span></div><div class="copy-option-GS" title="Copy inner HTML" data-value="needHtml"><div class="check-GS"></div><span>Copy HTML</span></div><div class="unlock-GS" title="Feeze tooltip on click"></div><div class="pause-GS" title="Pause"></div><div class="destroy-GS" title="Close"></div><div class="about-info-GS hide-GS"><strong>Gimme Style</strong> helps to check and copy an element's CSS styles. Hover the cursor on the element to see CSS, and click to copy.<br/><br/>Click the '<strong>lock</strong>' icon and a popup with CSS will be frozen after clicking on the element. The second click on the '<strong>lock</strong>' icon will unfreeze a popup.<br/><br/>In addition, you may copy the HTML code and CSS of element children on demand.</div>
 </div>
 <pre id="${infoId}" class="info-GS"></pre>`;
-
             const additionalStyles = document.createElement('style');
             additionalStyles.id = stylesId;
             additionalStyles.innerText = cssGS;
@@ -90,7 +89,9 @@ if (typeof window.GimmeStyle === 'undefined') {
             const delta = 5;
             const { scrollY } = window;
 
-            self.constants.dashboard.style.transform = `translate(0, ${scrollY + delta}px)`;
+            if (self.constants.dashboard) {
+                self.constants.dashboard.style.transform = `translate(0, ${scrollY + delta}px)`;
+            }
         },
 
         handleMouseOver(e) {
@@ -173,7 +174,6 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
             const mediaResult = this.prepareStylesString(elMediaRules, '');
             const inlineStyles = (el.getAttribute('style') ?? '').trim();
             let result = this.prepareStylesString(elRules, inlineStyles);
-
             const keyframeStyles = allKeyframeRules.reduce((res, rule) => {
                 if (elRules.animationNames.includes(rule.name)) {
                     const css = rule.cssText;
@@ -222,7 +222,6 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
                 const firstLine = media ? '{\n      ' : '{\n  ';
 
                 return `${res}${separator}${css
-                    // .replace(/^(.*?) {/g, (m) => m.replace(/,\s+/g, ',\n'))
                     .replace(/\s+(--)*\w[-\w]*: ;/g, '') // remove rules without value
                     .replace(/(\s+0px)/g, ' 0')
                     .replace(/({\s+)/g, firstLine)
@@ -253,11 +252,11 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
 
         toggleCopyOption(e) {
             const target = e.currentTarget;
-            const input = target.children[0];
-            const val = input.value;
+            const checkmark = target.children[0];
+            const val = target.dataset.value;
 
+            checkmark.classList.toggle('checked-GS');
             self.settings[val] = !self.settings[val];
-            input.checked = !input.checked;
         },
 
         copyStylesOfSelectedEl(e) {
@@ -300,10 +299,7 @@ ${html}`;
                 const copied = 'copied';
 
                 popup.classList.add(copied);
-
-                setTimeout(() => {
-                    popup.classList.remove(copied);
-                }, delay);
+                setTimeout(() => { popup.classList.remove(copied); }, delay);
             });
         },
 
@@ -440,7 +436,6 @@ ${tempDiv.innerHTML.trim()}
                     // In case site has http (not secure) connection we wouldn't fetch external css.
                     // Proxy can help with it, but need an additional service.
                     self.constants.error = error.message;
-
                     throw new Error(`Network response was not ok: ${response.statusText}`);
                 }
 
@@ -453,7 +448,6 @@ ${tempDiv.innerHTML.trim()}
                 return self.getCssRulesFromSheet(_style.sheet.cssRules);
             } catch (e) {
                 self.constants.error = e.message;
-
                 throw new Error(e);
             }
         },
@@ -560,33 +554,36 @@ ${tempDiv.innerHTML.trim()}
             self = this;
 
             this.addUI();
-            this.placeDashboard();
-            this.prepareAllRules().then((result) => {
-                this.constants.allRules = result;
-                this.constants.allMediaRules = this.constants.allMediaRules.map((m) => m.cssRules).flat();
-            });
 
-            document.querySelector('.destroy-GS').addEventListener('click', this.destroy);
-            document.querySelector('.pause-GS').addEventListener('click', this.togglePause);
-            document.querySelector('.unlock-GS').addEventListener('click', this.toggleLock);
-            document.querySelector('.about-GS').addEventListener('click', this.toggleAbout);
-            document.querySelectorAll('.copy-option-GS').forEach((el) => {
-                el.addEventListener('click', this.toggleCopyOption);
-            });
-            document.addEventListener('scroll', this.placeDashboard);
-            document.addEventListener('mouseover', this.handleMouseOver);
-            document.addEventListener('click', this.copyStylesOfSelectedEl);
-            document.addEventListener('keydown', this.handleEscapePress);
+            if (self.constants.dashboard) {
+                this.placeDashboard();
+                this.prepareAllRules().then((result) => {
+                    this.constants.allRules = result;
+                    this.constants.allMediaRules = this.constants.allMediaRules.map((m) => m.cssRules).flat();
+                });
+
+                document.querySelector('.destroy-GS')?.addEventListener('click', this.destroy);
+                document.querySelector('.pause-GS')?.addEventListener('click', this.togglePause);
+                document.querySelector('.unlock-GS')?.addEventListener('click', this.toggleLock);
+                document.querySelector('.about-GS')?.addEventListener('click', this.toggleAbout);
+                document.querySelectorAll('.copy-option-GS')?.forEach((el) => {
+                    el.addEventListener('click', this.toggleCopyOption);
+                });
+                document.addEventListener('scroll', this.placeDashboard);
+                document.addEventListener('mouseover', this.handleMouseOver);
+                document.addEventListener('click', this.copyStylesOfSelectedEl);
+                document.addEventListener('keydown', this.handleEscapePress);
+            }
         },
 
         destroy() {
             const { dashboardId, stylesId } = self.constants;
 
-            document.querySelector('.destroy-GS').removeEventListener('click', self.destroy);
-            document.querySelector('.pause-GS').removeEventListener('click', self.togglePause);
-            document.querySelector('.unlock-GS').removeEventListener('click', self.toggleLock);
-            document.querySelector('.about-GS').removeEventListener('click', self.toggleAbout);
-            document.querySelectorAll('.copy-option-GS').forEach((el) => {
+            document.querySelector('.destroy-GS')?.removeEventListener('click', self.destroy);
+            document.querySelector('.pause-GS')?.removeEventListener('click', self.togglePause);
+            document.querySelector('.unlock-GS')?.removeEventListener('click', self.toggleLock);
+            document.querySelector('.about-GS')?.removeEventListener('click', self.toggleAbout);
+            document.querySelectorAll('.copy-option-GS')?.forEach((el) => {
                 el.removeEventListener('click', self.toggleCopyOption);
             });
             document.removeEventListener('scroll', self.placeDashboard);
@@ -595,8 +592,8 @@ ${tempDiv.innerHTML.trim()}
             document.removeEventListener('keydown', self.handleEscapePress);
 
             self.cleanHighlightClass();
-            document.getElementById(dashboardId).remove();
-            document.getElementById(stylesId).remove();
+            document.getElementById(dashboardId)?.remove();
+            document.getElementById(stylesId)?.remove();
             self = null;
 
             delete window.GimmeStyle;
