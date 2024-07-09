@@ -369,41 +369,42 @@ ${tempDiv.innerHTML.trim()}
             return html;
         },
 
-        async prepareAllRules() { // TODO: looks overkill
-            let _allRules = new Map();
-            let allRules = await Array.from(document.styleSheets)
-                .reduce(async(accPromise, s) => {
-                    const acc = await accPromise;
+        async prepareAllRules() {
+            let tmpRules = new Map();
 
-                    try {
-                        if (s.ownerNode.id !== self.constants.stylesId) {
-                            const cssArr = self.getCssRulesFromSheet(s.cssRules);
+            await Array.from(document.styleSheets).reduce(async(accPromise, s) => {
+                const acc = await accPromise;
 
-                            acc.push(...cssArr);
-                        }
-                    } catch (e) { // cross-domain stylesheets with restrictive CORS headers
-                        const isUrlSecure = s.href.startsWith('https');
-                        let settings = isUrlSecure ? { mode: 'cors', cache: 'no-store' } : { mode: 'no-cors', cache: 'no-store' };
+                try {
+                    if (s.ownerNode.id !== self.constants.stylesId) {
+                        const cssArr = self.getCssRulesFromSheet(s.cssRules);
 
-                        try { // Workaround in case we can't read external css
-                            const data = await self.fetchStylesheet(s.href, settings, e);
-
-                            acc.push(...data);
-                        } catch (_) {}
+                        self.mergeRulesWithSameSelector(cssArr, tmpRules);
                     }
+                } catch (e) { // cross-domain stylesheets with restrictive CORS headers
+                    const isUrlSecure = s.href.startsWith('https');
+                    let settings = isUrlSecure ? { mode: 'cors', cache: 'no-store' } : { mode: 'no-cors', cache: 'no-store' };
 
-                    return acc;
-                }, Promise.resolve([]));
+                    try { // Workaround in case we can't read external css
+                        const data = await self.fetchStylesheet(s.href, settings, e);
 
-            // Combine rules with have equal selector
-            allRules.forEach((rule) => { // TODO: is it possible to move it to previous loop?
-                const selectorText = rule.selectorText || rule.name || rule.conditionText;
-
-                if (!selectorText) {
-                    return;
+                        self.mergeRulesWithSameSelector(data, tmpRules);
+                    } catch (_) {}
                 }
 
-                let rules = _allRules.get(selectorText);
+                return acc;
+            }, Promise.resolve([]));
+
+            return [...tmpRules.values()];
+        },
+
+        mergeRulesWithSameSelector(rulesArray, tempRulesSet) {
+            rulesArray.forEach((rule) => {
+                const selectorText = rule.selectorText || rule.name || rule.conditionText;
+
+                if (!selectorText) { return; }
+
+                let rules = tempRulesSet.get(selectorText);
 
                 if (rules) { // Existed selector. Have to add new rules
                     // Get rules without selector
@@ -417,15 +418,14 @@ ${tempDiv.innerHTML.trim()}
                     const selector = rules.cssText.replace(/\{([^}]+)}/, '{}');
                     // Get rid of repeated rules with the same value
                     let currentCssText = [...new Set([...oldRules, ...newRules])].join(' ');
+
                     // Add new rules for existed selector
                     currentCssText = selector.replace('{}', `{ ${currentCssText} }`);
-                    _allRules.set(selectorText, { ...rules, cssText: currentCssText });
+                    tempRulesSet.set(selectorText, { ...rules, cssText: currentCssText });
                 } else { // New selector
-                    _allRules.set(selectorText, rule);
+                    tempRulesSet.set(selectorText, rule);
                 }
             });
-
-            return [..._allRules.values()];
         },
 
         async fetchStylesheet(url, settings, error) {
