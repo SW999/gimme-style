@@ -1,4 +1,3 @@
-// TODO: missed styles starts from *::before or *::after
 // TODO: popup adds horizontal scrollbar in some cases
 
 if (typeof window.GimmeStyle === 'undefined') {
@@ -222,8 +221,8 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
 
                 return `${res}${separator}${css
                     .replace(/\s+(--)*\w[-\w]*: ;/g, '') // remove rules without value
-                    .replace(/(\s+0px)/g, ' 0')
-                    .replace(/({\s+)/g, firstLine)
+                    .replace(/(\s+0px)/g, ' 0') // margin: 0px; => margin: 0;
+                    .replace(/({\s+)/g, firstLine) // next for start each rule from new line
                     .replace(/(;\s+)/g, nextLine)
                     .replace(/(;\s+})/g, ruleAfter)}${postfix}`;
             }, '');
@@ -439,7 +438,7 @@ ${tempDiv.innerHTML.trim()}
                     self.constants.error = error.message;
                     throw new Error(`Network response was not ok: ${response.statusText}`);
                 }
-
+                // we can't read external css directly, so we fetch it and add to style tag as a workaround
                 const data = await response.text();
                 const style = document.createElement('style');
 
@@ -535,7 +534,7 @@ ${tempDiv.innerHTML.trim()}
                     let { selectorText, cssText, type, style, name, conditionText, cssRules = [] } = rule;
 
                     if (cssRules.length > 0) {
-                        if (type === window.CSSRule.MEDIA_RULE) {
+                        if (type === window.CSSRule.MEDIA_RULE) { // store media rules to additional array due to different structure
                             cssRules = Array.from(cssRules).map((r) => {
                                 const { selectorText, cssText, type, style } = r;
 
@@ -545,7 +544,7 @@ ${tempDiv.innerHTML.trim()}
                             this.constants.allMediaRules.push({ conditionText, cssRules, cssText, type });
 
                             return acc;
-                        } else if (rule.type === window.CSSRule.KEYFRAMES_RULE) {
+                        } else if (rule.type === window.CSSRule.KEYFRAMES_RULE) { // store keyframe rules to additional array due to different structure
                             this.constants.allKeyframeRules.push({ cssText, name });
 
                             return acc;
