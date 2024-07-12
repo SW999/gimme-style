@@ -122,7 +122,7 @@ if (typeof window.GimmeStyle === 'undefined') {
                     .replace(/{/g, '<span class="info-delimiter-GS">{</span><span class="info-rules-GS">')
                     .replace(/\/\* Inline styles \*\//g, '  <span class="info-comment-GS">/*  Inline styles */</span>')
                     .replace(/}/g, '</span><span class="info-delimiter-GS">}</span>');
-                result = `<span class="info-selector-GS">${self.getSelectorName(target)}${offsetHeight ? `    ${offsetWidth}×${offsetHeight}px` : ''}</span>
+                result = `<span class="info-selector-GS">${self.getSelectorName(target)}${offsetHeight ? `    <span class="info-delimiter-GS">${offsetWidth}×${offsetHeight}px</span>` : ''}</span>
 <span class="info-delimiter-GS">----------------</span>
 ${result}`;
 
@@ -168,8 +168,14 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
             const elRules = this.getSeparatedRules(el, allRules);
             const elMediaRules = this.getSeparatedRules(el, allMediaRules);
             const mediaResult = this.prepareStylesString(elMediaRules, '');
-            const inlineStyles = (el.getAttribute('style') ?? '').trim();
+            const inlineStyles = this.prepareInlineStyles(el);
             let result = this.prepareStylesString(elRules, inlineStyles);
+            const font = window.getComputedStyle(el, null).getPropertyValue('font');
+            // Add font
+            if (Boolean(font)) {
+                result = `\n/* font: ${font} */\n\n${result}`;
+            }
+
             const keyframeStyles = allKeyframeRules.reduce((res, rule) => {
                 if (elRules.animationNames.includes(rule.name)) {
                     const css = rule.cssText;
@@ -514,17 +520,11 @@ ${tempDiv.innerHTML.trim()}
 
         prepareStylesString(rules, inlineStyles) {
             const { defaultRules, beforeRules, afterRules, hoverRules, activeRules, visitedRules, focusRules } = rules;
-            let _inlineStyles = inlineStyles;
             let defaultStyles = this.getStylesByRules(defaultRules);
 
             // Add inline styles
-            if (_inlineStyles !== '') {
-                _inlineStyles = _inlineStyles
-                    .replace(/:\s*/g, ': ')
-                    .replace(/;?$/, ';')
-                    .replace(/;\s*(?!$)/g, ';\n  ');
-
-                defaultStyles = defaultStyles.replace(/}\n\n$/, `/* Inline styles */\n  ${_inlineStyles}\n}\n\n`);
+            if (inlineStyles !== '') {
+                defaultStyles = `${defaultStyles}${inlineStyles}`;
             }
 
             const result = [beforeRules, afterRules, hoverRules, activeRules, visitedRules, focusRules]
@@ -562,6 +562,17 @@ ${tempDiv.innerHTML.trim()}
 
                     return acc;
                 }, []);
+        },
+
+        prepareInlineStyles(el) {
+            let inlineStyles = (el.getAttribute('style') ?? '').trim();
+
+            if (inlineStyles !== '') {
+                inlineStyles = inlineStyles.replace(/:\s*/g, ': ').replace(/;?$/, ';').replace(/;\s*(?!$)/g, ';\n  ');
+                inlineStyles = `/* Inline styles */\n${this.getSelectorName(el)} {\n  ${inlineStyles}\n}\n\n`;
+            }
+
+            return inlineStyles;
         },
 
         init() {
