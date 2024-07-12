@@ -1,5 +1,3 @@
-// TODO: popup adds horizontal scrollbar in some cases
-
 if (typeof window.GimmeStyle === 'undefined') {
     let self = null;
 
@@ -140,7 +138,7 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
             }
         },
 
-        movePopup(el) {
+        movePopup(el) { // TODO: popup adds horizontal scrollbar in some cases
             if (this.settings.pause) {
                 return;
             }
@@ -467,37 +465,46 @@ ${tempDiv.innerHTML.trim()}
                     const selectorText = rule.selectorText;
                     // in case selector starts with *::before or *::after
                     if (selectorText.startsWith('::before') || selectorText.startsWith('::after')) {
+                        if (defaultRules.length > 1) {
+                            defaultRules.splice(1, 0, rule);
+                        } else {
+                            defaultRules.push(rule);
+                        }
                         return;
                     }
 
                     const tmpSelectorText = selectorText.replace(/ :/g, ' *:');
                     const name = rule.style.animationName;
 
-                    if (el.matches(selectorText)) {
-                        if (selectorText !== `.${highlightClass}`) {
-                            defaultRules.push(rule);
+                    try {
+                        if (el.matches(selectorText)) {
+                            if (selectorText !== `.${highlightClass}`) {
+                                defaultRules.push(rule);
+                                addAnimationName(name);
+                            }
+                        } else if (el.matches(tmpSelectorText.replace(/([^\\(])(:hover)\b/g, '$1'))) {
+                            hoverRules.push(rule);
+                            addAnimationName(name);
+                        } else if (el.matches(tmpSelectorText.replace(/([^\\(])(:active)\b/g, '$1'))) {
+                            activeRules.push(rule);
+                            addAnimationName(name);
+                        } else if (el.matches(tmpSelectorText.replace(/([^\\(])(:visited)\b/g, '$1'))) {
+                            visitedRules.push(rule);
+                            addAnimationName(name);
+                        } else if (el.matches(tmpSelectorText
+                            .replace(/([^\\(])(:focus-visible|:focus-within)\b/g, '$1')
+                            .replace(/([^\\(])(:focus)\b/g, '$1'))) {
+                            focusRules.push(rule);
+                            addAnimationName(name);
+                        } else if (el.matches(tmpSelectorText.replace(/::before\b/g, ''))) {
+                            beforeRules.push(rule);
+                            addAnimationName(name);
+                        } else if (el.matches(tmpSelectorText.replace(/::after\b/g, ''))) {
+                            afterRules.push(rule);
                             addAnimationName(name);
                         }
-                    } else if (el.matches(tmpSelectorText.replace(/([^\\(])(:hover)\b/g, '$1'))) {
-                        hoverRules.push(rule);
-                        addAnimationName(name);
-                    } else if (el.matches(tmpSelectorText.replace(/([^\\(])(:active)\b/g, '$1'))) {
-                        activeRules.push(rule);
-                        addAnimationName(name);
-                    } else if (el.matches(tmpSelectorText.replace(/([^\\(])(:visited)\b/g, '$1'))) {
-                        visitedRules.push(rule);
-                        addAnimationName(name);
-                    } else if (el.matches(tmpSelectorText
-                        .replace(/([^\\(])(:focus-visible|:focus-within)\b/g, '$1')
-                        .replace(/([^\\(])(:focus)\b/g, '$1'))) {
-                        focusRules.push(rule);
-                        addAnimationName(name);
-                    } else if (el.matches(tmpSelectorText.replace(/::before\b/g, ''))) {
-                        beforeRules.push(rule);
-                        addAnimationName(name);
-                    } else if (el.matches(tmpSelectorText.replace(/::after\b/g, ''))) {
-                        afterRules.push(rule);
-                        addAnimationName(name);
+                    } catch (_) {
+                        console.error(`Can't process selector ${selectorText}`);
                     }
                 }
             });
