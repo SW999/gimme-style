@@ -34,4 +34,4 @@ jobs:
           git checkout -B main origin/main  # or the branch you are working on
           git add index.html
           git commit -m "Update version to ${{ steps.get_tag.outputs.tag }}"
-          git push origin HEAD:main  # push changes to the same branch
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:main  # push changes to the same branch
