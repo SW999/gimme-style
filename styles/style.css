@@ -81,7 +81,7 @@ summary {
     cursor: pointer;
 }
 
-a:not(.demo *) {
+a {
     border-bottom: 1px dotted #999;
     color: #999;
     text-decoration: none;
@@ -93,7 +93,7 @@ a:not(.demo *):before { /* only for demo */
     text-decoration: none;
 }
 
-a:not(.demo *):hover {
+a:hover {
     display: inline-block;
     border-bottom-style: solid;
     color: black;
@@ -164,10 +164,37 @@ hr {
     width: 105px;
     margin: 10px auto 0;
     padding: 7px;
-    color: white;
-    background-color: darkgreen;
+    border: 0;
     border-radius: 4px;
+    color: white;
     text-decoration: none;
+    background-color: darkgreen;
+}
+.demo a:hover {
+    display: block;
+    border: 0;
+    color: white;
+    animation: none;
+}
+
+footer {
+    display: flex;
+    padding: 10px 20px;
+    border-top: thin solid #999;
+}
+
+footer a {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-right: 7px;
+    border: 0;
+    background: url("../images/github.svg") no-repeat center center;
+    background-size: 22px;
+}
+
+footer a:hover {
+    animation: none;
 }
 
 @keyframes pulse { /* only for demo */

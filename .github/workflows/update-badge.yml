@@ -1,0 +1,32 @@
+name: Update README version badge
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  update-badge:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Get the latest tag
+      id: get_tag
+      run: echo ::set-output name=tag::${GITHUB_REF#refs/tags/}
+
+    - name: Update README with version badge
+      run: |
+        TAG=${{ steps.get_tag.outputs.tag }}
+        BADGE_URL="https://img.shields.io/badge/version-${TAG}-brightgreen"
+        sed -i "s|!\\[Version Badge\\](.*)|![Version Badge](${BADGE_URL})|" README.md
+      
+    - name: Commit and push changes
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add README.md
+        git commit -m "Update version badge to $TAG"
+        git push

@@ -38,4 +38,4 @@ The second click on the bookmark (esc or button with a cross) will close **Gimme
 
 ## License
 
-MIT © 2024 Sergey Vaitehovich
+MIT © 2024 Sergey Vaitehovich ![Version Badge](https://img.shields.io/badge/version-VERSION_PLACEHOLDER-brightgreen)

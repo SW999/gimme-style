@@ -1,4 +1,8 @@
-if (typeof window.GimmeStyle === 'undefined') {
+/*
+* GimmeStyle v0.9 | MIT License | Sergey Vaitehovich 2024
+*/
+
+if (window.GimmeStyle === undefined) {
     let self = null;
 
     window.GimmeStyle = {
