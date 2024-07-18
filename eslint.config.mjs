@@ -8,6 +8,7 @@ export default [
                 document: 'readonly',
                 fetch: 'readonly',
                 navigator: 'readonly',
+                requestAnimationFrame: 'readonly',
                 setTimeout: 'readonly',
                 window: 'readonly',
             },

@@ -1,5 +1,5 @@
 /*
-* GimmeStyle v0.9.1 | MIT License | Sergey Vaitehovich 2024
+* GimmeStyle v0.9.12 | MIT License | Sergey Vaitehovich 2024
 */
 
 if (window.GimmeStyle === undefined) {
@@ -7,12 +7,13 @@ if (window.GimmeStyle === undefined) {
 
     window.GimmeStyle = {
         constants: {
-            allRules: [],
-            allMediaRules: [],
             allKeyframeRules: [],
+            allMediaRules: [],
+            allRules: [],
             cssGS: 'html{scrollbar-color:unset}.dashboard-GS,pre.info-GS{top:0;z-index:9999;position:absolute}.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box;margin:0;padding:0;font:12px/1.2 Arial,sans-serif}.dashboard-wrapper-GS{pointer-events:none}.dashboard-wrapper-GS strong{font-weight:700}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{box-shadow:rgba(0,0,0,.16) 0 3px 6px,rgba(0,0,0,.23) 0 3px 6px;right:5px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;width:354px;padding:4px;border:thin solid silver;border-radius:4px;background-color:#fff;color:#282a36}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid #ffb86c;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer;user-select:none}.check-GS{position:relative;width:13px;height:13px;border:thin solid;border-radius:2px}.check-GS.checked-GS::after{left:2px;top:-1px;width:4px;height:7px;border-width:0 1px 1px 0;border-style:solid;border-color:#00f;transform-origin:bottom left;transform:rotate(45deg)}.about-GS,.destroy-GS,.pause-GS,.unlock-GS{position:relative;display:block;cursor:pointer}.about-GS::after,.about-GS::before,.check-GS.checked-GS::after,.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid #ffb86c;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{top:-6px;width:13px;height:9px;margin:0 3px;border:2px solid #ffb86c;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:#ffb86c}.unlock-GS::after{left:-5px;top:6px;width:20px;height:13px;border-radius:3px;border:2px solid #ffb86c}.unlock-GS::before{left:3px;top:10px;width:4px;height:6px;border-radius:2px;border:thin solid #fff;border-top:4px solid #000;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid #ffb86c;border-radius:50%}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:50%;background:currentColor;transform:translateX(-50%)}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid #ffb86c;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}pre.info-GS{left:0;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#282a36;color:#f1fa8c;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap;word-break:break-word}pre.info-GS:empty{display:none}.info-GS.locked{border:thin solid #ffb86c;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:#ffb86c;transform:translateX(-50%)}.info-GS.copied::before{display:block;width:86px;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.info-selector-GS{color:#ff79c6}.info-delimiter-GS{color:#f8f8f2}.info-comment-GS{color:#6272a4}.info-rules-GS{color:#50fa7b}.hide-GS{display:none!important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
             dashboard: null,
             dashboardId: 'dashboardWrapperGS',
+            debouncedMouseOver: null,
             delay: 1600,
             error: null,
             hideClass: 'hide-GS',
@@ -105,40 +106,42 @@ if (window.GimmeStyle === undefined) {
 
                 const target = e.target;
 
-                if (freeze || self.isDashboard(target)) {
-                    return;
-                }
+                requestAnimationFrame(() => {
+                    if (freeze || self.isDashboard(target)) {
+                        return;
+                    }
 
-                const { offsetWidth, offsetHeight } = target;
+                    const { offsetWidth, offsetHeight } = target;
 
-                self.constants.prevTarget?.classList.remove(highlightClass);
-                self.constants.uniqStyles.clear();
-                self.constants.uniqKeyFrames.clear();
-                self.constants.result = '';
-                self.constants.prevTarget = target;
+                    self.constants.prevTarget?.classList.remove(highlightClass);
+                    self.constants.uniqStyles.clear();
+                    self.constants.uniqKeyFrames.clear();
+                    self.constants.result = '';
+                    self.constants.prevTarget = target;
 
-                target.classList.add(highlightClass);
+                    target.classList.add(highlightClass);
 
-                let result = self.getElStyles(target);
+                    let result = self.getElStyles(target);
 
-                self.constants.result = result;
-                result = result
-                    .replace(/{/g, '<span class="info-delimiter-GS">{</span><span class="info-rules-GS">')
-                    .replace(/\/\* Inline styles \*\//g, '  <span class="info-comment-GS">/*  Inline styles */</span>')
-                    .replace(/}/g, '</span><span class="info-delimiter-GS">}</span>');
-                result = `<span class="info-selector-GS">${self.getSelectorName(target)}${offsetHeight ? `    <span class="info-delimiter-GS">${offsetWidth}×${offsetHeight}px</span>` : ''}</span>
+                    self.constants.result = result;
+                    result = result
+                        .replace(/{/g, '<span class="info-delimiter-GS">{</span><span class="info-rules-GS">')
+                        .replace(/\/\* Inline styles \*\//g, '  <span class="info-comment-GS">/*  Inline styles */</span>')
+                        .replace(/}/g, '</span><span class="info-delimiter-GS">}</span>');
+                    result = `<span class="info-selector-GS">${self.getSelectorName(target)}${offsetHeight ? `    <span class="info-delimiter-GS">${offsetWidth}×${offsetHeight}px</span>` : ''}</span>
 <span class="info-delimiter-GS">----------------</span>
 ${result}`;
 
-                if (self.constants.error) {
-                    result = `${result}
+                    if (self.constants.error) {
+                        result = `${result}
 Error: ${self.constants.error}
 If it happens with local files, please restart your browser with flag "--allow-file-access-from-files".
 Otherwise, it may be CORS issue related to one of third-party CSS file, from a CDN for example. This case is not supported yet.`;
-                }
+                    }
 
-                self.constants.info.innerHTML = result.trim(); // Show styles in popup
-                self.movePopup(target); // Add new position to popup
+                    self.constants.info.innerHTML = result.trim(); // Show styles in popup
+                    self.movePopup(target); // Add new position to popup
+                });
             }
         },
 
@@ -579,12 +582,23 @@ ${tempDiv.innerHTML.trim()}
             return inlineStyles;
         },
 
+        debounce(callback, delay) {
+            let timeout;
+
+            return (...args) => {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    callback(...args);
+                }, delay);
+            };
+        },
+
         init() {
             self = this;
 
             this.addUI();
 
-            if (self.constants.dashboard) {
+            if (this.constants.dashboard) {
                 this.placeDashboard();
                 this.prepareAllRules().then((result) => {
                     let tmpMediaRules = new Map();
@@ -595,6 +609,8 @@ ${tempDiv.innerHTML.trim()}
                     this.constants.allMediaRules = [...tmpMediaRules.values()];
                 });
 
+                this.constants.debouncedMouseOver = this.debounce(this.handleMouseOver, this.constants.delay / 8); // 200ms
+
                 document.querySelector('.destroy-GS')?.addEventListener('click', this.destroy);
                 document.querySelector('.pause-GS')?.addEventListener('click', this.togglePause);
                 document.querySelector('.unlock-GS')?.addEventListener('click', this.toggleLock);
@@ -603,7 +619,7 @@ ${tempDiv.innerHTML.trim()}
                     el.addEventListener('click', this.toggleCopyOption);
                 });
                 document.addEventListener('scroll', this.placeDashboard);
-                document.addEventListener('mouseover', this.handleMouseOver);
+                document.addEventListener('mouseover', this.constants.debouncedMouseOver);
                 document.addEventListener('click', this.copyStylesOfSelectedEl);
                 document.addEventListener('keydown', this.handleEscapePress);
             }
@@ -620,7 +636,7 @@ ${tempDiv.innerHTML.trim()}
                 el.removeEventListener('click', self.toggleCopyOption);
             });
             document.removeEventListener('scroll', self.placeDashboard);
-            document.removeEventListener('mouseover', self.handleMouseOver);
+            document.removeEventListener('mouseover', self.constants.debouncedMouseOver);
             document.removeEventListener('click', self.copyStylesOfSelectedEl);
             document.removeEventListener('keydown', self.handleEscapePress);
 
