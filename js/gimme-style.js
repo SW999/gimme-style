@@ -1,5 +1,5 @@
 /*
-* GimmeStyle v0.9.12 | MIT License | Sergey Vaitehovich 2024
+* GimmeStyle v0.9.13 | MIT License | Sergey Vaitehovich 2024
 */
 
 if (window.GimmeStyle === undefined) {
@@ -106,42 +106,39 @@ if (window.GimmeStyle === undefined) {
 
                 const target = e.target;
 
-                requestAnimationFrame(() => {
-                    if (freeze || self.isDashboard(target)) {
-                        return;
-                    }
+                if (freeze || self.isDashboard(target)) {
+                    return;
+                }
 
-                    const { offsetWidth, offsetHeight } = target;
+                const { offsetWidth, offsetHeight } = target;
 
-                    self.constants.prevTarget?.classList.remove(highlightClass);
-                    self.constants.uniqStyles.clear();
-                    self.constants.uniqKeyFrames.clear();
-                    self.constants.result = '';
-                    self.constants.prevTarget = target;
+                self.constants.prevTarget?.classList.remove(highlightClass);
+                self.constants.uniqStyles.clear();
+                self.constants.uniqKeyFrames.clear();
+                self.constants.result = '';
+                self.constants.prevTarget = target;
+                target.classList.add(highlightClass);
 
-                    target.classList.add(highlightClass);
+                let result = self.getElStyles(target);
 
-                    let result = self.getElStyles(target);
-
-                    self.constants.result = result;
-                    result = result
-                        .replace(/{/g, '<span class="info-delimiter-GS">{</span><span class="info-rules-GS">')
-                        .replace(/\/\* Inline styles \*\//g, '  <span class="info-comment-GS">/*  Inline styles */</span>')
-                        .replace(/}/g, '</span><span class="info-delimiter-GS">}</span>');
-                    result = `<span class="info-selector-GS">${self.getSelectorName(target)}${offsetHeight ? `    <span class="info-delimiter-GS">${offsetWidth}×${offsetHeight}px</span>` : ''}</span>
+                self.constants.result = result;
+                result = result
+                    .replace(/{/g, '<span class="info-delimiter-GS">{</span><span class="info-rules-GS">')
+                    .replace(/\/\* Inline styles \*\//g, '  <span class="info-comment-GS">/*  Inline styles */</span>')
+                    .replace(/}/g, '</span><span class="info-delimiter-GS">}</span>');
+                result = `<span class="info-selector-GS">${self.getSelectorName(target)}${offsetHeight ? `    <span class="info-delimiter-GS">${offsetWidth}×${offsetHeight}px</span>` : ''}</span>
 <span class="info-delimiter-GS">----------------</span>
 ${result}`;
 
-                    if (self.constants.error) {
-                        result = `${result}
+                if (self.constants.error) {
+                    result = `${result}
 Error: ${self.constants.error}
 If it happens with local files, please restart your browser with flag "--allow-file-access-from-files".
 Otherwise, it may be CORS issue related to one of third-party CSS file, from a CDN for example. This case is not supported yet.`;
-                    }
+                }
 
-                    self.constants.info.innerHTML = result.trim(); // Show styles in popup
-                    self.movePopup(target); // Add new position to popup
-                });
+                self.constants.info.innerHTML = result.trim(); // Show styles in popup
+                self.movePopup(target); // Add new position to popup
             }
         },
 
@@ -609,7 +606,7 @@ ${tempDiv.innerHTML.trim()}
                     this.constants.allMediaRules = [...tmpMediaRules.values()];
                 });
 
-                this.constants.debouncedMouseOver = this.debounce(this.handleMouseOver, this.constants.delay / 8); // 200ms
+                this.constants.debouncedMouseOver = this.debounce(this.handleMouseOver, 250);
 
                 document.querySelector('.destroy-GS')?.addEventListener('click', this.destroy);
                 document.querySelector('.pause-GS')?.addEventListener('click', this.togglePause);
