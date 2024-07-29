@@ -1,5 +1,5 @@
 /*
-* GimmeStyle v0.9.13 | MIT License | Sergey Vaitehovich 2024
+* GimmeStyle v0.9.14 | MIT License | Sergey Vaitehovich 2024
 */
 
 if (window.GimmeStyle === undefined) {
@@ -10,7 +10,7 @@ if (window.GimmeStyle === undefined) {
             allKeyframeRules: [],
             allMediaRules: [],
             allRules: [],
-            cssGS: 'html{scrollbar-color:unset}.dashboard-GS,pre.info-GS{top:0;z-index:9999;position:absolute}.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box;margin:0;padding:0;font:12px/1.2 Arial,sans-serif}.dashboard-wrapper-GS{pointer-events:none}.dashboard-wrapper-GS strong{font-weight:700}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{box-shadow:rgba(0,0,0,.16) 0 3px 6px,rgba(0,0,0,.23) 0 3px 6px;right:5px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;width:354px;padding:4px;border:thin solid silver;border-radius:4px;background-color:#fff;color:#282a36}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid #ffb86c;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer;user-select:none}.check-GS{position:relative;width:13px;height:13px;border:thin solid;border-radius:2px}.check-GS.checked-GS::after{left:2px;top:-1px;width:4px;height:7px;border-width:0 1px 1px 0;border-style:solid;border-color:#00f;transform-origin:bottom left;transform:rotate(45deg)}.about-GS,.destroy-GS,.pause-GS,.unlock-GS{position:relative;display:block;cursor:pointer}.about-GS::after,.about-GS::before,.check-GS.checked-GS::after,.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid #ffb86c;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{top:-6px;width:13px;height:9px;margin:0 3px;border:2px solid #ffb86c;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:#ffb86c}.unlock-GS::after{left:-5px;top:6px;width:20px;height:13px;border-radius:3px;border:2px solid #ffb86c}.unlock-GS::before{left:3px;top:10px;width:4px;height:6px;border-radius:2px;border:thin solid #fff;border-top:4px solid #000;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid #ffb86c;border-radius:50%}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:50%;background:currentColor;transform:translateX(-50%)}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid #ffb86c;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}pre.info-GS{left:0;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#282a36;color:#f1fa8c;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap;word-break:break-word}pre.info-GS:empty{display:none}.info-GS.locked{border:thin solid #ffb86c;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:#ffb86c;transform:translateX(-50%)}.info-GS.copied::before{display:block;width:86px;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.info-selector-GS{color:#ff79c6}.info-delimiter-GS{color:#f8f8f2}.info-comment-GS{color:#6272a4}.info-rules-GS{color:#50fa7b}.hide-GS{display:none!important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
+            cssGS: 'html{scrollbar-color:unset}pre.info-GS{top:0;z-index:9998;position:absolute}.dashboard-wrapper-GS,.dashboard-wrapper-GS *,.dashboard-wrapper-GS :after,.dashboard-wrapper-GS :before{box-sizing:border-box;margin:0;padding:0;font:12px/1.2 Arial,sans-serif}.dashboard-wrapper-GS{pointer-events:none}.dashboard-wrapper-GS strong{font-weight:700}.dashboard-GS,.info-GS,.selected-GS{pointer-events:all}.selected-GS{outline:green dashed thin}.dashboard-GS{position:fixed;top:5px;right:5px;z-index:9999;box-shadow:rgba(0,0,0,.16) 0 3px 6px,rgba(0,0,0,.23) 0 3px 6px;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;width:354px;padding:4px;border:thin solid silver;border-radius:4px;background-color:#fff;color:#282a36}.copy-option-GS{display:flex;align-content:center;flex-wrap:wrap;gap:4px;height:22px;padding:0 5px;border:2px solid #ffb86c;border-radius:4px;font-size:12px;line-height:22px;cursor:pointer;user-select:none}.check-GS{position:relative;width:13px;height:13px;border:thin solid;border-radius:2px}.check-GS.checked-GS::after{left:2px;top:-1px;width:4px;height:7px;border-width:0 1px 1px 0;border-style:solid;border-color:#00f;transform-origin:bottom left;transform:rotate(45deg)}.about-GS,.destroy-GS,.pause-GS,.unlock-GS{position:relative;display:block;cursor:pointer}.about-GS::after,.about-GS::before,.check-GS.checked-GS::after,.destroy-GS::after,.destroy-GS::before,.pause-GS::before,.unlock-GS::after,.unlock-GS::before{content:"";display:block;position:absolute}.destroy-GS::after,.destroy-GS::before{width:12px;height:2px;background:currentColor;transform:rotate(45deg);border-radius:5px;top:8px;left:3px}.destroy-GS::after{transform:rotate(-45deg)}.destroy-GS,.pause-GS{width:22px;height:22px;border:2px solid #ffb86c;border-radius:4px}.pause-GS::before{left:6px;top:6px;width:6px;height:6px;border-left:2px solid;border-right:2px solid}.pause-GS.play-GS::before{top:4px;left:7px;width:0;height:10px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:6px solid;border-right:0}.unlock-GS{top:-6px;width:13px;height:9px;margin:0 3px;border:2px solid #ffb86c;border-top-right-radius:100px;border-top-left-radius:100px;border-bottom-color:transparent;border-right-color:transparent}.unlock-GS.lock-GS{border-top-right-radius:50%;border-top-left-radius:50%;border-right-color:#ffb86c}.unlock-GS::after{left:-5px;top:6px;width:20px;height:13px;border-radius:3px;border:2px solid #ffb86c}.unlock-GS::before{left:3px;top:10px;width:4px;height:6px;border-radius:2px;border:thin solid #fff;border-top:4px solid #000;background:currentColor}.about-GS{width:20px;height:20px;border:2px solid #ffb86c;border-radius:50%}.about-GS::after,.about-GS::before{border-radius:3px;width:2px;left:50%;background:currentColor;transform:translateX(-50%)}.about-GS::after{bottom:2px;height:8px}.about-GS::before{top:2px;height:2px}.about-info-GS{border:2px solid #ffb86c;border-radius:4px;flex-grow:1;padding:5px;color:#000;font-size:14px;line-height:1.2}pre.info-GS{left:0;width:auto;min-width:100px;max-width:400px;min-height:100px;max-height:90vh;padding:10px;border:thin solid silver;border-radius:4px;background-color:#282a36;color:#f1fa8c;font-size:13px;transition:transform .4s;overflow-y:auto;white-space:pre-wrap;word-break:break-word}pre.info-GS:empty{display:none}.info-GS.locked{border:thin solid #ffb86c;border-radius:2px;background-color:#383433;color:#0fb}.info-GS::before{content:"Copied!";position:absolute;top:22px;left:50%;display:none;font-size:24px;color:#ffb86c;transform:translateX(-50%)}.info-GS.copied::before{display:block;width:86px;animation:.6s 2 pulse-GS}.info-GS::-webkit-scrollbar-track{background-color:transparent;border-radius:6px}.info-GS::-webkit-scrollbar{width:6px;background-color:transparent}.info-GS::-webkit-scrollbar-thumb{border-radius:6px;background-color:#4d9c41}.info-selector-GS{color:#ff79c6}.info-delimiter-GS{color:#f8f8f2}.info-comment-GS{color:#6272a4}.info-rules-GS{color:#50fa7b}.hide-GS{display:none!important}@keyframes pulse-GS{from,to{transform:scale3d(1,1,1) translateX(-50%)}50%{transform:scale3d(1.09,1.09,1.09) translateX(-50%)}}',
             dashboard: null,
             dashboardId: 'dashboardWrapperGS',
             debouncedMouseOver: null,
@@ -37,18 +37,21 @@ if (window.GimmeStyle === undefined) {
 
         addUI() {
             let { dashboardId, infoId, stylesId, cssGS } = this.constants;
+            const fragment = document.createDocumentFragment();
             const dashboard = document.createElement('div');
+            const additionalStyles = document.createElement('style');
+
             dashboard.id = dashboardId;
             dashboard.className = 'dashboard-wrapper-GS';
             dashboard.innerHTML = `<div class="dashboard-GS" id="dashboard-GS"><div class="about-GS" title="Toggle About section"></div><div class="copy-option-GS" title="Copy CSS of all children" data-value="needChildCss"><div class="check-GS"></div><span>Copy childs' CSS</span></div><div class="copy-option-GS" title="Copy inner HTML" data-value="needHtml"><div class="check-GS"></div><span>Copy HTML</span></div><div class="unlock-GS" title="Feeze tooltip on click"></div><div class="pause-GS" title="Pause"></div><div class="destroy-GS" title="Close"></div><div class="about-info-GS hide-GS"><strong>Gimme Style</strong> helps to check and copy an element's CSS styles. Hover the cursor on the element to see CSS, and click to copy.<br/><br/>Click the '<strong>lock</strong>' icon and a popup with CSS will be frozen after clicking on the element. The second click on the '<strong>lock</strong>' icon will unfreeze a popup.<br/><br/>In addition, you may copy the HTML code and CSS of element children on demand.</div>
 </div>
 <pre id="${infoId}" class="info-GS"></pre>`;
-            const additionalStyles = document.createElement('style');
+            fragment.appendChild(dashboard);
             additionalStyles.id = stylesId;
             additionalStyles.innerText = cssGS;
+            fragment.appendChild(additionalStyles);
+            document.body.appendChild(fragment);
 
-            document.body.appendChild(dashboard);
-            document.body.appendChild(additionalStyles);
             this.constants.dashboard = document.getElementById('dashboard-GS');
             this.constants.info = document.getElementById(infoId);
         },
@@ -84,15 +87,6 @@ if (window.GimmeStyle === undefined) {
         toggleFreeze() {
             this.settings.freeze = !this.settings.freeze;
             document.getElementById(this.constants.infoId).classList.toggle('locked');
-        },
-
-        placeDashboard() {
-            const delta = 5;
-            const { scrollY } = window;
-
-            if (self.constants.dashboard) {
-                self.constants.dashboard.style.transform = `translate(0, ${scrollY + delta}px)`;
-            }
         },
 
         handleMouseOver(e) {
@@ -410,7 +404,7 @@ ${tempDiv.innerHTML.trim()}
                     `${rule.selectorText}-${rule.media}` :
                     rule.selectorText || rule.name || rule.conditionText;
 
-                if (!selectorText) { return; }
+                if (selectorText === undefined) { return; }
 
                 let rules = tempRulesSet.get(selectorText);
 
@@ -440,7 +434,7 @@ ${tempDiv.innerHTML.trim()}
             try {
                 const response = await fetch(url, settings);
 
-                if (!response.ok) {
+                if (response.ok === false) {
                     // In case site has http (not secure) connection we wouldn't fetch external css.
                     // Proxy can help with it, but need an additional service.
                     self.constants.error = error.message;
@@ -596,7 +590,6 @@ ${tempDiv.innerHTML.trim()}
             this.addUI();
 
             if (this.constants.dashboard) {
-                this.placeDashboard();
                 this.prepareAllRules().then((result) => {
                     let tmpMediaRules = new Map();
                     const tmpMedia = this.constants.allMediaRules.map((m) => m.cssRules).flat();
@@ -615,7 +608,6 @@ ${tempDiv.innerHTML.trim()}
                 document.querySelectorAll('.copy-option-GS')?.forEach((el) => {
                     el.addEventListener('click', this.toggleCopyOption);
                 });
-                document.addEventListener('scroll', this.placeDashboard);
                 document.addEventListener('mouseover', this.constants.debouncedMouseOver);
                 document.addEventListener('click', this.copyStylesOfSelectedEl);
                 document.addEventListener('keydown', this.handleEscapePress);
@@ -632,7 +624,6 @@ ${tempDiv.innerHTML.trim()}
             document.querySelectorAll('.copy-option-GS')?.forEach((el) => {
                 el.removeEventListener('click', self.toggleCopyOption);
             });
-            document.removeEventListener('scroll', self.placeDashboard);
             document.removeEventListener('mouseover', self.constants.debouncedMouseOver);
             document.removeEventListener('click', self.copyStylesOfSelectedEl);
             document.removeEventListener('keydown', self.handleEscapePress);
