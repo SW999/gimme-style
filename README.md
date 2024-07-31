@@ -33,6 +33,7 @@ The second click on the bookmark (esc or button with a cross) will close **Gimme
 # Known issues
 
 * Popup adds horizontal scrollbar in some cases
+* Used 'scrollend' event, which is not supported in Safari
 * It does not work for local pages because of security rules (JavaScript in the browser doesn't have access to local files). Please restart your browser with the flag **"--allow-file-access-from-files"** to fix such issue.
 * May not work for sites with third-party styles, especially for sites with insecure (HTTP) connection (or depending on the server security settings). A workaround may have used a proxy service, but such cases are not currently supported.
 

@@ -1,5 +1,5 @@
 /*
-* GimmeStyle v0.91.0 | MIT License | Sergey Vaitehovich 2024
+* GimmeStyle v0.91.2 | MIT License | Sergey Vaitehovich 2024
 */
 
 if (window.GimmeStyle === undefined) {
