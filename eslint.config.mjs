@@ -3,6 +3,7 @@ export default [
         files: ['js/*.js'],
         languageOptions: {
             globals: {
+                AbortController: 'readonly',
                 clearTimeout: 'readonly',
                 console: 'readonly',
                 document: 'readonly',

@@ -1,5 +1,5 @@
 /*
-* GimmeStyle v0.91.2 | MIT License | Sergey Vaitehovich 2024
+* GimmeStyle v0.91.3 | MIT License | Sergey Vaitehovich 2024
 */
 
 if (window.GimmeStyle === undefined) {
@@ -35,6 +35,8 @@ if (window.GimmeStyle === undefined) {
             pause: false,
         },
 
+        controller: new AbortController(),
+
         addUI() {
             let { dashboardId, infoId, stylesId, cssGS } = this.constants;
             const fragment = document.createDocumentFragment();
@@ -48,7 +50,7 @@ if (window.GimmeStyle === undefined) {
 <pre id="${infoId}" class="info-GS"></pre>`;
             fragment.appendChild(dashboard);
             additionalStyles.id = stylesId;
-            additionalStyles.innerText = cssGS;
+            additionalStyles.textContent = cssGS;
             fragment.appendChild(additionalStyles);
             document.body.appendChild(fragment);
 
@@ -266,7 +268,7 @@ Otherwise, it may be CORS issue related to one of third-party CSS file, from a C
         copyStylesOfSelectedEl(e) {
             const { freeze, lock, needHtml, needChildCss, pause } = self.settings;
 
-            if (pause) {
+            if (pause || !navigator.clipboard) {
                 return;
             }
 
@@ -594,6 +596,8 @@ ${tempDiv.innerHTML.trim()}
             this.addUI();
 
             if (this.constants.dashboard) {
+                const { signal } = this.controller;
+
                 this.prepareAllRules().then((result) => {
                     let tmpMediaRules = new Map();
                     const tmpMedia = this.constants.allMediaRules.map((m) => m.cssRules).flat();
@@ -605,35 +609,24 @@ ${tempDiv.innerHTML.trim()}
 
                 this.constants.debouncedMouseOver = this.debounce(this.handleMouseOver, 250);
 
-                document.querySelector('.destroy-GS')?.addEventListener('click', this.destroy);
-                document.querySelector('.pause-GS')?.addEventListener('click', this.togglePause);
-                document.querySelector('.unlock-GS')?.addEventListener('click', this.toggleLock);
-                document.querySelector('.about-GS')?.addEventListener('click', this.toggleAbout);
+                document.querySelector('.destroy-GS')?.addEventListener('click', this.destroy, { signal });
+                document.querySelector('.pause-GS')?.addEventListener('click', this.togglePause, { signal });
+                document.querySelector('.unlock-GS')?.addEventListener('click', this.toggleLock, { signal });
+                document.querySelector('.about-GS')?.addEventListener('click', this.toggleAbout, { signal });
                 document.querySelectorAll('.copy-option-GS')?.forEach((el) => {
-                    el.addEventListener('click', this.toggleCopyOption);
+                    el.addEventListener('click', this.toggleCopyOption, { signal });
                 });
-                document.addEventListener('scrollend', this.handleScrollEnd);
-                document.addEventListener('mouseover', this.constants.debouncedMouseOver);
-                document.addEventListener('click', this.copyStylesOfSelectedEl);
-                document.addEventListener('keydown', this.handleEscapePress);
+                document.addEventListener('scrollend', this.handleScrollEnd, { signal });
+                document.addEventListener('mouseover', this.constants.debouncedMouseOver, { signal });
+                document.addEventListener('click', this.copyStylesOfSelectedEl, { signal });
+                document.addEventListener('keydown', this.handleEscapePress, { signal });
             }
         },
 
         destroy() {
             const { dashboardId, stylesId } = self.constants;
 
-            document.querySelector('.destroy-GS')?.removeEventListener('click', self.destroy);
-            document.querySelector('.pause-GS')?.removeEventListener('click', self.togglePause);
-            document.querySelector('.unlock-GS')?.removeEventListener('click', self.toggleLock);
-            document.querySelector('.about-GS')?.removeEventListener('click', self.toggleAbout);
-            document.querySelectorAll('.copy-option-GS')?.forEach((el) => {
-                el.removeEventListener('click', self.toggleCopyOption);
-            });
-            document.removeEventListener('scrollend', self.handleScrollEnd);
-            document.removeEventListener('mouseover', self.constants.debouncedMouseOver);
-            document.removeEventListener('click', self.copyStylesOfSelectedEl);
-            document.removeEventListener('keydown', self.handleEscapePress);
-
+            self.controller.abort(); // Remove all listeners
             self.cleanHighlightClass();
             document.getElementById(dashboardId)?.remove();
             document.getElementById(stylesId)?.remove();

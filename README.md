@@ -34,9 +34,10 @@ The second click on the bookmark (esc or button with a cross) will close **Gimme
 
 * Popup adds horizontal scrollbar in some cases
 * Used 'scrollend' event, which is not supported in Safari
+* Can't copy styles and HTML to clipboard for http (not secure) sites
 * It does not work for local pages because of security rules (JavaScript in the browser doesn't have access to local files). Please restart your browser with the flag **"--allow-file-access-from-files"** to fix such issue.
 * May not work for sites with third-party styles, especially for sites with insecure (HTTP) connection (or depending on the server security settings). A workaround may have used a proxy service, but such cases are not currently supported.
 
 ## License
 
-MIT © 2024 Sergey Vaitehovich ![Version Badge](https://img.shields.io/badge/version-VERSION_PLACEHOLDER-brightgreen)
+MIT © 2024 Sergey Vaitehovich ![Version Badge](https://img.shields.io/badge/version-v0.91.3-brightgreen)
